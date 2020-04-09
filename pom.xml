@@ -28,7 +28,7 @@
     <commons-lang3.version>3.3.2</commons-lang3.version>
     <commons-io.version>1.3.2</commons-io.version>
     <commons-net.version>3.3</commons-net.version>
-    <commons-fileupload.version>1.3.1</commons-fileupload.version>
+    <commons-fileupload.version>1.3.3</commons-fileupload.version>
     <dozer.version>5.5.1</dozer.version>
     <jbcrypt.version>0.4</jbcrypt.version>
     <poi-ooxml.version>3.17</poi-ooxml.version>
