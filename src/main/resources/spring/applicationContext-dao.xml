@@ -19,13 +19,11 @@
         <property name="username" value="${jdbc.userName}" />
         <property name="password" value="${jdbc.passWord}" />
         <!-- 初始化连接大小 -->
-        <property name="initialSize" value="${jdbc.initialSize}"></property>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
         <!-- 连接池最大数量 -->
-        <property name="maxActive" value="${jdbc.maxActive}"></property>
-        <!-- 连接池最大空闲 -->
-        <property name="maxIdle" value="${jdbc.maxIdle}"></property>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
         <!-- 连接池最小空闲 -->
-        <property name="minIdle" value="${jdbc.minIdle}"></property>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
     </bean>
 
     <!-- spring和MyBatis整合，不需要mybatis的配置映射文件 -->

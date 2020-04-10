@@ -34,6 +34,7 @@
     <poi-ooxml.version>3.17</poi-ooxml.version>
     <easyexcel.version>1.1.2-beta5</easyexcel.version>
     <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+    <kaptcha.version>2.3.2</kaptcha.version>
   </properties>
 
 
@@ -218,6 +219,13 @@
       <groupId>org.thymeleaf.extras</groupId>
       <artifactId>thymeleaf-extras-java8time</artifactId>
       <version>${thymeleaf.version}</version>
+    </dependency>
+
+    <!-- 验证码 -->
+    <dependency>
+      <groupId>com.github.penggle</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>${kaptcha.version}</version>
     </dependency>
   </dependencies>
 
