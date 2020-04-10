@@ -33,6 +33,7 @@
     <jbcrypt.version>0.4</jbcrypt.version>
     <poi-ooxml.version>3.17</poi-ooxml.version>
     <easyexcel.version>1.1.2-beta5</easyexcel.version>
+    <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
   </properties>
 
 
@@ -190,6 +191,33 @@
       <groupId>com.alibaba</groupId>
       <artifactId>easyexcel</artifactId>
       <version>${easyexcel.version}</version>
+    </dependency>
+    <!-- 引入thymeleaf -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
+      <version>${thymeleaf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring4</artifactId>
+      <version>${thymeleaf.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>javassist</artifactId>
+          <groupId>org.javassist</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+      <version>${thymeleaf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-java8time</artifactId>
+      <version>${thymeleaf.version}</version>
     </dependency>
   </dependencies>
 
