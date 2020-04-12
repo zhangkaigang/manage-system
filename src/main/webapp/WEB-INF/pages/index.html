@@ -8,6 +8,20 @@
         <!-- 头部 -->
         <div th:replace="common/head :: header"></div>
 
+        <div class="layui-side">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree arrow2" nav-id="${item.systemType}" lay-accordion="true" lay-filter="admin-side-nav" style="margin-top: 15px;">
+                    <li class="layui-nav-item">
+                        <a><i class="layui-icon ${menu.icon}"></i>&emsp;<cite>系统管理</cite><span class='layui-nav-more'></span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a id="firstPageAction" lay-href="${subMenu.url}">用户管理</a></dd>
+                            <dd><a lay-href="${subMenu.url}">角色管理</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
