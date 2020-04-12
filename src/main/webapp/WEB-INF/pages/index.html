@@ -2,7 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--head部分-->
 <head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
-<script type="text/javascript">
-    setTimeout("top.location.href = contextPath + '/loginPage';", 0);
-</script>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <!-- 头部 -->
+        <div th:replace="common/head :: header"></div>
+
+    </div>
+</body>
 </html>

@@ -2,6 +2,8 @@ package com.zhangkaigang.index.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.zhangkaigang.index.constant.IndexConstants;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import java.io.ByteArrayOutputStream;
  * @Version:1.0
  */
 @Controller
+@Api(tags = "验证码接口")
 public class CaptchaController {
 
     @Autowired
@@ -32,6 +35,7 @@ public class CaptchaController {
      * @throws Exception
      */
     @RequestMapping("/kaptcha")
+    @ApiOperation(value = "获取验证码", httpMethod = "GET")
     public void defaultKaptcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
         byte[] captcha = null;
         ByteArrayOutputStream out = new ByteArrayOutputStream();

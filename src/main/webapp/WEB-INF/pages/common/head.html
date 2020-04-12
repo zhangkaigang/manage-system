@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<body>
+    <header th:fragment="header">
+        <div class="layui-header">
+            <!--<a href="javascript:;" class="layui-hide-xs"><a href="/home" style="font-weight: bold;"><div class="layui-logo"></div></a>
+            </a>
+            <a href="javascript:;" class="layui-hide-xs">
+                <div class="switchMenu" style="display: none;"><i class="fa fa-indent"></i></div>
+            </a>-->
+            <div class="layui-logo">
+                <cite>后台管理系统</cite>
+            </div>
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item" lay-unselect>
+                    <a ew-event="flexible" title="侧边伸缩"><i class="layui-icon layui-icon-shrink-right"></i></a>
+                </li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a ew-event="refresh" title="刷新"><i class="layui-icon layui-icon-refresh-3"></i></a>
+                </li>
+            </ul>
+        </div>
+    </header>
+</body>
+</html>

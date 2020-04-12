@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!--head部分-->
-<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
-
+<head th:include="layout :: htmlhead" th:with="title='后台管理'">
+</head>
+<link rel="stylesheet" media="screen" th:href="@{/css/particles.css}">
+<script th:src="@{/js/pages/login.js}"></script>
 <body>
-你好
+<button  οnclick="alert(111)">gfdgf</button>
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
 
+    <!-- 登录框 start -->
+    <div class="login-content">
+        <div class="login-title">登录</div>
+
+        <div class="layui-row layui-col-space15">
+            <form class="layui-form login-form">
+                <div class="layui-col-sm12 layui-col-md12">
+                    <div class="layui-form-item">
+                        <input type="text" name="loginName" lay-verify="required|loginName" autocomplete="off" placeholder="账号" class="layui-input login-input">
+                        <i class="layui-icon layui-icon-username login-icon"></i>
+                    </div>
+                </div>
+                <div class="layui-col-sm12 layui-col-md12">
+                    <div class="layui-form-item">
+                        <input type="password" name="password" lay-verify="required|password" autocomplete="off" placeholder="密码" class="layui-input login-input">
+                        <i class="layui-icon layui-icon-password login-icon"></i>
+                    </div>
+                </div>
+                <div class="layui-col-sm12 layui-col-md12">
+                    <div class="layui-row">
+                        <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            <div class="layui-form-item">
+                                <input type="text" name="verifyCode" id="verifyCode" lay-verify="required|code" autocomplete="off" placeholder="验证码" class="layui-input login-input" maxlength="4">
+                                <i class="layui-icon layui-icon-vercode login-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                            <div class="login-code">
+                                <img id="kaptchaImage" th:src="@{/kaptcha}" onclick="changeVerifyCode()"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-col-sm12 layui-col-md12">
+                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">立即登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 登录框 end -->
+    <script th:src="@{/js/utils/particles.js}"></script>
+    <script th:src="@{/js/utils/app_particles.js}"></script>
 </body>
 </html>
