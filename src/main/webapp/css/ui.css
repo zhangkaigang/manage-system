@@ -57,6 +57,8 @@ html {
     font-size: 24px;
 }
 /************************************** 登录界面 end ***********************************************/
+
+/************************************** 全局头部 start *********************************************/
 .layui-layout-admin .layui-header{
     position: absolute;
     top: 0;
@@ -102,27 +104,22 @@ html {
     padding: 0 15px;
     cursor: pointer;
 }
-.layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
-    height: 2px;
-    top: 0!important;
-    background-color: #191a23;
-}
 .layui-layout-admin .layui-header a:hover {
     color: #595959;
 }
-
 .layui-layout-admin .layui-header .layui-layout-right {
     padding: 0;
-}
-.layui-layout-admin .layui-header .layui-nav .layui-nav-item .layui-nav-child {
-    top: 55px;
 }
 .layui-layout-admin .layui-header .layui-nav .layui-nav-more {
     border-color: #8c8c8c transparent transparent;
 }
+.layui-layout-admin .layui-header .layui-nav .layui-nav-item .layui-nav-child {
+    top: 55px;
+}
 
+/************************************** 全局头部 end *********************************************/
 
-
+/************************************** 全局侧边栏 start *****************************************/
 .layui-layout-admin .layui-side {
     position: absolute;
     top: 50px;
@@ -150,11 +147,173 @@ html {
     -webkit-transition: color .3s,background-color .3s;
     transition: color .3s,background-color .3s;
 }
-.layui-layout-admin .layui-side .layui-nav .layui-nav-item>a {
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item > a {
     cursor: pointer;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 5px
 }
+.layui-layout-admin .layui-side .layui-nav .layui-nav-more {
+    right: 15px;
+}
+.layui-nav-tree .arrow2 .layui-nav-more {
+    font-family: layui-icon!important;
+    font-size: 12px;
+    font-weight: 600;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    line-height: normal;
+    border: 0;
+    margin: -3px 0 0 0;
+    padding: 0;
+    width: 10px;
+    height: 6px;
+    top: 50%;
+    display: inline-block;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item>.layui-nav-child {
+    position: static;
+}
+.layui-layout-admin .layui-side .layui-nav .layui-nav-item .layui-nav-child a {
+    padding-left: 50px;
+    cursor: pointer;
+}
+
+/************************************** 全局侧边栏 end *****************************************/
+
+/************************************** 全局页脚 start ****************************************/
+.layui-layout-admin .layui-footer{
+    text-align: center;
+}
+/************************************** 全局页脚 end *****************************************/
+
+
+/************************************** 全局内容主体 start *************************************/
+.layui-layout-admin .layui-body {
+    position: absolute;
+    left: 235px;
+    top: 50px;
+    z-index: auto;
+    overflow: auto;
+    -webkit-transition: left .3s;
+    transition: left .3s;
+    -webkit-overflow-scrolling: touch;
+}
+.layui-layout-admin .layui-body>.layui-tab {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+}
+.layui-layout-admin .layui-body>.layui-tab>.layui-tab-title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 80px 0 40px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    overflow: hidden;
+    -webkit-transition: none;
+    transition: none;
+    z-index: 998;
+}
+.layui-layout-admin .layui-body>.layui-tab>.layui-tab-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 40px;
+    padding: 0;
+}
+.admin-tabs-control.layui-icon-prev {
+    left: 0;
+    border-left: none;
+    border-right: 1px solid #f6f6f6;
+}
+.admin-tabs-control {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    border-left: 1px solid #f6f6f6;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+    text-align: center;
+    cursor: pointer;
+    z-index: 998;
+}
+.admin-tabs-control.layui-icon-next {
+    right: 40px;
+}
+.admin-tabs-control.layui-icon-down {
+    right: 0;
+}
+.admin-tabs-control>.layui-nav, .admin-tabs-control>.layui-nav .layui-nav-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+.admin-tabs-control>.layui-nav .layui-nav-child {
+    right: 0;
+    top: 40px;
+    left: auto;
+}
+.admin-tabs-control>.layui-nav .layui-nav-bar, .admin-tabs-control>.layui-nav .layui-nav-more {
+    display: none;
+}
+.layui-layout-admin .layui-body>.layui-tab>.layui-tab-title li {
+    min-width: auto;
+    max-width: 160px;
+    line-height: 40px;
+    padding: 0 30px 0 15px;
+    border-right: 1px solid #f6f6f6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+}
+.layui-layout-admin .layui-body>.layui-tab>.layui-tab-title li.layui-this, .layui-layout-admin .layui-body>.layui-tab>.layui-tab-title li:hover {
+    background-color: #f6f6f6;
+}
+.layui-layout-admin .layui-body>.layui-tab>.layui-tab-title li {
+    min-width: auto;
+    max-width: 160px;
+    line-height: 40px;
+    padding: 0 30px 0 15px;
+    border-right: 1px solid #f6f6f6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+}
+.content-iframe{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+/************************************** 全局内容主体 end *************************************/
+
 
 /************************************** 首页 start ************************************************/
 

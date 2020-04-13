@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>cs</title>
-</head>
-<body>
-长撒测试
-</body>
-</html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<div style="margin: 1%">
+    <!--查询表单-->
+    <form id="searchForm" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <input placeholder="真实姓名" id="realName" name="realName" autocomplete="off" class="layui-input" type="text"/>
+            </div>
+            <button class="layui-btn"  lay-submit="" data-type="btn-search" lay-filter="btn-search">
+                <i class="layui-icon layui-icon-search"></i>查询
+            </button>
+        </div>
+    </form>
+</div>

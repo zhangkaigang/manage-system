@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<bar th:fragment="sidebar">
+    <div class="layui-side">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree arrow2" style="margin-top: 15px;">
+                <li class="layui-nav-item">
+                    <a>
+                        <i class="layui-icon layui-icon-set"></i>&emsp;
+                        <cite>系统管理</cite>
+                        <span class='layui-nav-more'></span>
+                    </a>
+                    <dl class="layui-nav-child" style="display: block">
+                        <dd>
+                            <a data-id="1" data-url="/sys/user" data-title="用户管理" class="menu_click">用户管理</a>
+                        </dd>
+                        <dd>
+                            <a data-id="2" data-url="/sys/user" data-title="角色管理" class="menu_click">角色管理</a>
+                        </dd>
+                        <dd>
+                            <a data-id="3" data-url="/sys/user" data-title="部门管理" class="menu_click">部门管理</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+</bar>
+
+</html>
