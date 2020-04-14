@@ -4,9 +4,20 @@
 }
 
 html {
-    background-color: #f2f2f2
+    /*background-color: #f5f7f9;*/
+}
+body {
+    color: #595959;
+    background-color: #f5f7f9;
+    overflow: hidden;
 }
 
+.bg-white {
+    background-color: #fff;
+}
+.content-div{
+    margin: 1%;
+}
 .layui-layout-body {
     position: fixed;
     left: 0;
@@ -315,7 +326,38 @@ html {
 /************************************** 全局内容主体 end *************************************/
 
 
-/************************************** 首页 start ************************************************/
+/************************************** 部门管理 start ************************************************/
+.dept-div{
+    margin: 1%;
+    height: 100%;
+    overflow: hidden;
+}
+.dept-tree-div{
+    position: absolute;
+    margin: 0px;
+    left: 0px;
+    right: auto;
+    top: 15px;
+    bottom: 0px;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    width: 20%;
+    display: block;
+    visibility: visible;
+}
+.dept-content-div{
+    position: absolute;
+    margin: 0px;
+    right: 12px;
+    top: 15px;
+    bottom: 0px;
+    height: 100%;
+    width: 78%;
+    z-index: 0;
+    display: block;
+    visibility: visible;
+}
 
-/************************************** 首页 end ************************************************/
+/************************************** 部门管理 end ************************************************/
 
