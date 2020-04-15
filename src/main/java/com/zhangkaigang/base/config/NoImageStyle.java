@@ -1,4 +1,4 @@
-package com.zhangkaigang.index.config;
+package com.zhangkaigang.base.config;
 
 import com.google.code.kaptcha.GimpyEngine;
 import com.google.code.kaptcha.util.Configurable;

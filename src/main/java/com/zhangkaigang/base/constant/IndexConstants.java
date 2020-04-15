@@ -1,4 +1,4 @@
-package com.zhangkaigang.index.constant;
+package com.zhangkaigang.base.constant;
 
 /**
  * @Description:TODO

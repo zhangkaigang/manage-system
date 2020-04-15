@@ -1,4 +1,4 @@
-package com.zhangkaigang.config;
+package com.zhangkaigang.base.config;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;

@@ -95,7 +95,7 @@
                         <!-- 图片样式 :原生有水纹 、 鱼眼 、 阴影 -->
                         <!--<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>-->
                         <!-- 重写图片样式，设置为无图片样式 -->
-                        <prop key="kaptcha.obscurificator.impl">com.zhangkaigang.index.config.NoImageStyle</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.zhangkaigang.base.config.NoImageStyle</prop>
                     </props>
                 </constructor-arg>
             </bean>

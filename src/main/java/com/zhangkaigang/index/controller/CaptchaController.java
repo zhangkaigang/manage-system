@@ -1,7 +1,7 @@
 package com.zhangkaigang.index.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.zhangkaigang.index.constant.IndexConstants;
+import com.zhangkaigang.base.constant.IndexConstants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
