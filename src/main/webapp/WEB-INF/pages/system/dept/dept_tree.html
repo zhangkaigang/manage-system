@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<link rel="stylesheet" th:href="@{/js/ztree/css/zTreeStyle/zTreeStyle.css}">
+
+<body style="background-color: #fff">
+    <div>
+        <div class="layui-row">
+            <ul id="zTree" class="ztree"></ul>
+            <ul id="deptTree" class="ztree" style="height: 300px;overflow-y: scroll;"></ul>
+        </div>
+        <div class="layui-row" style="background: #CFD4D5;padding: 10px;">
+            <div style="text-align: center;">
+                <button class="layui-btn layui-btn-sm" id="saveButton">保存</button>
+                <button class="layui-btn layui-btn-sm layui-btn-primary" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/ztree/jquery.ztree.all.js}"></script>
+</body>
+</html>
