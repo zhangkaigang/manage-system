@@ -7,17 +7,15 @@
 <body style="background-color: #fff">
     <div>
         <div class="layui-row">
-            <ul id="zTree" class="ztree"></ul>
-            <ul id="deptTree" class="ztree" style="height: 300px;overflow-y: scroll;"></ul>
+            <ul id="deptTree" class="ztree" style="height: 300px;overflow-y: auto;"></ul>
         </div>
-        <div class="layui-row" style="background: #CFD4D5;padding: 10px;">
-            <div style="text-align: center;">
-                <button class="layui-btn layui-btn-sm" id="saveButton">保存</button>
+        <div class="form-group-bottom text-center">
+                <button class="layui-btn layui-btn-sm" id="btnSure">确定</button>
                 <button class="layui-btn layui-btn-sm layui-btn-primary" type="button">取消</button>
-            </div>
         </div>
     </div>
 
     <script th:src="@{/js/ztree/jquery.ztree.all.js}"></script>
+    <script th:src="@{/js/pages/dept/dept_tree.js}"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.zhangkaigang.system.service.impl;
 
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
+import com.zhangkaigang.base.pojo.node.ZTreeNode;
 import com.zhangkaigang.system.dao.DeptDao;
 import com.zhangkaigang.system.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public List<LayuiTreeNode> getDeptLayuiTree() {
         return deptDao.getDeptLayuiTree();
+    }
+
+    @Override
+    public List<ZTreeNode> getDeptZTree() {
+        return deptDao.getDeptZTree();
     }
 }

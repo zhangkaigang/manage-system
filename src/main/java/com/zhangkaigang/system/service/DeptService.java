@@ -1,6 +1,7 @@
 package com.zhangkaigang.system.service;
 
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
+import com.zhangkaigang.base.pojo.node.ZTreeNode;
 
 import java.util.List;
 
@@ -17,4 +18,10 @@ public interface DeptService {
      * @return
      */
     List<LayuiTreeNode> getDeptLayuiTree();
+
+    /**
+     * 获取ztree风格的部门树
+     * @return
+     */
+    List<ZTreeNode> getDeptZTree();
 }

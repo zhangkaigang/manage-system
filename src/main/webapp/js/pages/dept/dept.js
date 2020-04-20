@@ -1,4 +1,4 @@
-var Dept = {
+var dept = {
     treeId: 'deptTree',
     tableId: 'deptTable',
     initCols: [[
@@ -22,7 +22,7 @@ layui.use(['tree', 'table'], function () {
     if (returnData) {
         // 仅节点左侧图标控制收缩
         tree.render({
-            elem: '#' + Dept.treeId,
+            elem: '#' + dept.treeId,
             data: returnData,
             // 是否仅允许节点左侧图标控制展开收缩
             onlyIconControl: true,

@@ -2,6 +2,8 @@ package com.zhangkaigang.system.controller;
 
 import com.zhangkaigang.base.pojo.node.LayuiTreeFactory;
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
+import com.zhangkaigang.base.pojo.node.ZTreeFactory;
+import com.zhangkaigang.base.pojo.node.ZTreeNode;
 import com.zhangkaigang.system.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,5 +65,17 @@ public class DeptController {
     @RequestMapping("deptTreePage")
     public String deptTreePage() {
         return PRIFIX + "dept_tree";
+    }
+
+    /**
+     * 获取ztree风格的部门树
+     * @return
+     */
+    @RequestMapping("getDeptZTree")
+    @ResponseBody
+    public List<ZTreeNode> getDeptZTree() {
+        List<ZTreeNode> zTreeNodeList = deptService.getDeptZTree();
+        zTreeNodeList.add(ZTreeFactory.createRoot());
+        return zTreeNodeList;
     }
 }

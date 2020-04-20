@@ -1,3 +1,6 @@
+var deptAdd = {
+    selectedNode : {}
+};
 layui.use(['layer', 'form'], function () {
     var layer = layui.layer;
     var form = layui.form;
@@ -10,8 +13,11 @@ layui.use(['layer', 'form'], function () {
             area: ['400px', '450px'],
             content: contextPath + '/sys/dept/deptTreePage',
             end: function () {
-                // $("#pid").val(DeptInfoDlg.data.pid);
-                // $("#pName").val(DeptInfoDlg.data.pName);
+                var selectedNode = deptAdd.selectedNode;
+                if (selectedNode && JSON.stringify(selectedNode) != '{}') {
+                    $("#pId").val(selectedNode.id);
+                    $("#pName").val(selectedNode.name);
+                }
             }
         });
     });
