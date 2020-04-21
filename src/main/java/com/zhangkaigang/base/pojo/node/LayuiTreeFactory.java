@@ -9,13 +9,13 @@ package com.zhangkaigang.base.pojo.node;
 public class LayuiTreeFactory {
 
     /**
-     * 生成跟节点
+     * 生成根节点
      * @return
      */
     public static LayuiTreeNode createRoot() {
         LayuiTreeNode treeNode = new LayuiTreeNode();
-        treeNode.setId(1L);
-        treeNode.setpId(0L);
+        treeNode.setId(0L);
+        treeNode.setpId(-1L);
         treeNode.setTitle("顶级");
         treeNode.setChecked(true);
         treeNode.setSpread(true);

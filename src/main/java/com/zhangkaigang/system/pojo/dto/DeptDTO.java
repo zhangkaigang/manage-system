@@ -1,58 +1,41 @@
-package com.zhangkaigang.system.pojo.po;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zhangkaigang.base.pojo.common.PublicPo;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+package com.zhangkaigang.system.pojo.dto;
 
 /**
  * @Description:TODO
  * @Author:zhang.kaigang
- * @Date:2020/4/18
+ * @Date:2020/4/21
  * @Version:1.0
  */
-@Table(name = "sys_dept")
-public class Dept extends PublicPo {
+public class DeptDTO {
 
     /**
      * 主键
      */
-    @Id
-    @Column(name = "dept_id")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long deptId;
 
     /**
      * 父部门id
      */
-    @Column(name = "p_id")
     private Long pId;
 
     /**
      * 部门简称
      */
-    @Column(name = "simple_name")
     private String simpleName;
 
     /**
      * 部门全称
      */
-    @Column(name = "full_name")
     private String fullName;
 
     /**
      * 描述
      */
-    @Column(name = "description")
     private String description;
 
     /**
      * 部门排序
      */
-    @Column(name = "sort")
     private Integer sort;
 
     public Long getDeptId() {
@@ -87,19 +70,19 @@ public class Dept extends PublicPo {
         this.fullName = fullName;
     }
 
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

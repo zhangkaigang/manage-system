@@ -14,7 +14,7 @@ var commonFuns = {
         return (localhostPaht + projectName);
     },
     // 封装ajax异步调用
-    $Ajax : function(url,data){
+    $Ajax : function(url, data){
         var returnDataTemp = {};
         $.ajax({
             type : 'post',
@@ -38,6 +38,18 @@ var commonFuns = {
 
 // 定义公共变量
 var contextPath = commonFuns.getRootPath ();
+
+layui.use(['form'], function () {
+    var form = layui.form;
+    // 自定义表单规则，要放在form.on外面，千万不能放在提交步骤中，否则会不触发
+    form.verify({
+        // 数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+        int: [
+            /[1-9]+[0-9]*/
+            , '请填入大于0的整数'
+        ]
+    });
+});
 
 
 

@@ -2,6 +2,7 @@ package com.zhangkaigang.system.service;
 
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
 import com.zhangkaigang.base.pojo.node.ZTreeNode;
+import com.zhangkaigang.system.pojo.dto.DeptDTO;
 
 import java.util.List;
 
@@ -24,4 +25,10 @@ public interface DeptService {
      * @return
      */
     List<ZTreeNode> getDeptZTree();
+
+    /**
+     * 新增部门
+     * @param deptDTO
+     */
+    void addDept(DeptDTO deptDTO);
 }

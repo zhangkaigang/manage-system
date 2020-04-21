@@ -21,4 +21,25 @@ layui.use(['layer', 'form'], function () {
             }
         });
     });
+
+    // 按钮点击事件
+    $('.layui-btn').on('click', function(){
+        var type = $(this).data('type');
+        deptAddFuns[type] ? deptAddFuns[type].call(this) : '';
+    });
+    
+    var deptAddFuns = {
+        // 保存
+        btnSave : function () {
+            // 监听表单提交
+            form.on('submit(btnSave)', function(data){
+                var formVal = data.field;
+                var returnDataTemp = commonFuns.$Ajax( contextPath + "/sys/dept/addDept", formVal);
+                console.log(returnDataTemp)
+                return false;
+            });
+        }
+    };
+    
+    
 });
