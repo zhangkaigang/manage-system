@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,8 +55,9 @@ public class DeptController {
     public List<LayuiTreeNode> getDeptLayuiTree() {
         List<LayuiTreeNode> layuiTreeNodeList = deptService.getDeptLayuiTree();
         layuiTreeNodeList.add(LayuiTreeFactory.createRoot());
-        return layuiTreeNodeList;
+        return LayuiTreeFactory.getLayuiTree(layuiTreeNodeList);
     }
+
 
     /**
      * 添加部门页面
@@ -89,6 +91,7 @@ public class DeptController {
     }
 
     @RequestMapping("/addDept")
+    @ResponseBody
     @ApiOperation(value = "添加部门", httpMethod = "POST")
     public Result addDept(DeptDTO deptDTO) {
         deptService.addDept(deptDTO);

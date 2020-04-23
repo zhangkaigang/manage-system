@@ -1,6 +1,5 @@
 package com.zhangkaigang.system.pojo.po;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhangkaigang.base.pojo.common.PublicPo;
 
 import javax.persistence.Column;
@@ -17,12 +16,13 @@ import javax.persistence.Table;
 @Table(name = "sys_dept")
 public class Dept extends PublicPo {
 
+
+
     /**
      * 主键
      */
     @Id
     @Column(name = "dept_id")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long deptId;
 
     /**
