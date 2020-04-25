@@ -34,6 +34,54 @@ var commonFuns = {
         });
         return returnDataTemp;
     },
+    // 处理结果
+    dealResult : function(returnData){
+        var data = returnData.data;
+        if(data.success){
+            // 刷新页面
+            window.location.reload();
+            layer.msg('操作成功', {
+                offset: 't',
+                time: 1000, //1s后自动关闭
+                icon : 1
+            });
+        }else{
+            if(data.messgae){
+                layer.msg(data.messgae, {icon: 5});
+            }else{
+                layer.msg(data.errMsg ? data.errMsg : '操作失败', {icon: 5});
+            }
+            return false;
+        }
+    },
+    // 处理子页面结果
+    dealChildResult : function(returnData){
+        var data = returnData.data;
+        if(data.success){
+            // 刷新父页面
+            window.parent.location.reload();
+            var index = parent.layer.getFrameIndex(window.name);
+            // 关闭弹出层
+            parent.layer.close(index);
+            layer.msg('操作成功', {
+                offset: 't',
+                time: 1000, //1s后自动关闭
+                icon : 1
+            });
+        }else{
+            if(data.messgae){
+                layer.msg(data.messgae, {icon: 5});
+            }else{
+                layer.msg(data.errMsg ? data.errMsg : '操作失败', {icon: 5});
+            }
+            return false;
+        }
+    },
+    btnCancel : function(){
+        // 获取当前弹出层的等级
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
 };
 
 // 定义公共变量

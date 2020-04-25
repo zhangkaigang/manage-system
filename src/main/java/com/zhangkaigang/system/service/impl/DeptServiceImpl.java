@@ -1,7 +1,9 @@
 package com.zhangkaigang.system.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
 import com.zhangkaigang.base.pojo.node.ZTreeNode;
+import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
 import com.zhangkaigang.base.utils.IdWorker;
 import com.zhangkaigang.base.utils.PoJoConverterUtil;
 import com.zhangkaigang.system.dao.DeptDao;
@@ -31,6 +33,13 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public List<LayuiTreeNode> getDeptLayuiTree() {
         return deptDao.getDeptLayuiTree();
+    }
+
+    @Override
+    public PageInfo<DeptDTO> list() {
+        List<Dept> deptList = deptDao.selectAll();
+        List<DeptDTO> deptDTOList = PoJoConverterUtil.objectListConverter(deptList, DeptDTO.class);
+        return LayuiPageFactory.getPageInfo(deptDTOList);
     }
 
     @Override

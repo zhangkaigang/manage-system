@@ -1,3 +1,4 @@
+var tableIns, pageCurr;
 var dept = {
     treeId: 'deptTree',
     tableId: 'deptTable',
@@ -35,6 +36,25 @@ layui.use(['tree', 'table'], function () {
         return false;
     }
 
+    // 渲染表格
+    tableIns = table.render({
+        height: 'full-120',
+        id: dept.tableId,
+        elem: '#' + dept.tableId,
+        url: contextPath + '/sys/dept/list',
+        cols: dept.initCols,
+        method:'post',
+        where:{},
+        page: {
+            limit:10,
+            limits:[10, 50, 100, 200]
+        },
+        done: function(res, curr, count){
+            pageCurr = curr;
+        }
+
+
+    });
 
     // 按钮点击事件
     $('.layui-btn').on('click', function(){
@@ -49,7 +69,7 @@ layui.use(['tree', 'table'], function () {
             layer.open({
                 type: 2,
                 title : '添加部门',
-                area: ['800px', '500px'],
+                area: ['800px', '550px'],
                 content: contextPath + '/sys/dept/addDeptPage'
             });
         }

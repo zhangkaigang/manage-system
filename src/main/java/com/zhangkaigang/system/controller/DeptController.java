@@ -1,11 +1,14 @@
 package com.zhangkaigang.system.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.enums.StatusCodeEnum;
 import com.zhangkaigang.base.pojo.common.Result;
 import com.zhangkaigang.base.pojo.node.LayuiTreeFactory;
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
 import com.zhangkaigang.base.pojo.node.ZTreeFactory;
 import com.zhangkaigang.base.pojo.node.ZTreeNode;
+import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
+import com.zhangkaigang.base.pojo.page.LayuiPageInfo;
 import com.zhangkaigang.system.pojo.dto.DeptDTO;
 import com.zhangkaigang.system.service.DeptService;
 import io.swagger.annotations.Api;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -56,6 +60,19 @@ public class DeptController {
         List<LayuiTreeNode> layuiTreeNodeList = deptService.getDeptLayuiTree();
         layuiTreeNodeList.add(LayuiTreeFactory.createRoot());
         return LayuiTreeFactory.getLayuiTree(layuiTreeNodeList);
+    }
+
+    /**
+     * 部门列表
+     * @return
+     */
+    @RequestMapping("/list")
+    @ResponseBody
+    @ApiOperation(value = "部门列表", httpMethod = "GET")
+    public LayuiPageInfo list(DeptDTO deptDTO) {
+        PageInfo<DeptDTO> pageInfo = deptService.list();
+        LayuiPageInfo layuiPageInfo = LayuiPageFactory.createPageInfo(pageInfo.getTotal(), pageInfo.getList());
+        return layuiPageInfo;
     }
 
 

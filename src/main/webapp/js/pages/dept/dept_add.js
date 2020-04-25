@@ -34,12 +34,15 @@ layui.use(['layer', 'form'], function () {
             // 监听表单提交
             form.on('submit(btnSave)', function(data){
                 var formVal = data.field;
-                var returnDataTemp = commonFuns.$Ajax( contextPath + "/sys/dept/addDept", formVal);
-                console.log(returnDataTemp)
+                var returnData = commonFuns.$Ajax( contextPath + "/sys/dept/addDept", formVal);
+                commonFuns.dealChildResult(returnData);
                 return false;
             });
+        },
+        // 取消
+        btnCancel : function () {
+            commonFuns.btnCancel();
         }
     };
-    
-    
+
 });

@@ -1,5 +1,6 @@
 package com.zhangkaigang.system.service;
 
+import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
 import com.zhangkaigang.base.pojo.node.ZTreeNode;
 import com.zhangkaigang.system.pojo.dto.DeptDTO;
@@ -19,6 +20,12 @@ public interface DeptService {
      * @return
      */
     List<LayuiTreeNode> getDeptLayuiTree();
+
+    /**
+     * 部门列表分页
+     * @return
+     */
+    PageInfo<DeptDTO> list();
 
     /**
      * 获取ztree风格的部门树

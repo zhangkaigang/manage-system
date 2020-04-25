@@ -43,6 +43,7 @@ layui.use(['layer'], function() {
     // 初始化部门树
     $.fn.zTree.init($("#" + deptTree.treeId), deptTree.setting, null);
 
+    // 确定
     $('#btnSure').click(function () {
         // 获取光标选中的节点
         var treeObj = $.fn.zTree.getZTreeObj(deptTree.treeId);
@@ -50,5 +51,10 @@ layui.use(['layer'], function() {
         window.parent.deptAdd.selectedNode = selectedNodes[0];
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
+    });
+
+    // 取消
+    $('#btnCancel').click(function () {
+        commonFuns.btnCancel();
     });
 });
