@@ -9,7 +9,7 @@ var dept = {
         {field: 'fullName', align: "center", sort: true, title: '部门全称'},
         {field: 'sort', align: "center", sort: true, title: '排序'},
         {field: 'description', align: "center", sort: true, title: '备注'},
-        {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
+        {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 150}
     ]],
     condition: {
         deptId: ""
@@ -53,7 +53,6 @@ layui.use(['tree', 'table'], function () {
             pageCurr = curr;
         }
 
-
     });
 
     // 按钮点击事件
@@ -70,25 +69,31 @@ layui.use(['tree', 'table'], function () {
                 type: 2,
                 title : '添加部门',
                 area: ['800px', '550px'],
-                content: contextPath + '/sys/dept/addDeptPage'
+                content: contextPath + '/sys/dept/addPage'
             });
         }
     };
 
-
-
-
-
-
-
-/*    table.render({
-        height: "450",
-        elem: '#' + Dept.tableId,
-        id: Dept.tableId,
-        url: contextPath + '/sys/dept/getDeptLayuiTree',
-        page: true,
-        cellMinWidth: 100,
-        cols: Dept.initCols
-    });*/
+    // 监听行工具事件
+    table.on('tool('+ dept.tableId +')', function(obj){
+        var selectData = obj.data;
+        if(obj.event === 'btnEdit'){
+            layer.open({
+                type: 2,
+                title : '修改部门',
+                area: ['800px', '550px'],
+                content: contextPath + '/sys/dept/editPage'
+            });
+        } else if (obj.event === 'btnDelete') {
+            layer.confirm('是否删除该部门以及其所有子部门？', {
+                    btn: ['确定', '取消']
+                }, function (index, layero) {
+                    var returnData = commonFuns.$Ajax(contextPath + "/sys/dept/delete", {"deptId" : selectData.deptId});
+                    console.log(returnData)
+                    commonFuns.dealResult(returnData);
+                }
+            );
+        }
+    });
 
 });

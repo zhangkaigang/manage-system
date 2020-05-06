@@ -10,8 +10,10 @@ import com.zhangkaigang.system.dao.DeptDao;
 import com.zhangkaigang.system.pojo.dto.DeptDTO;
 import com.zhangkaigang.system.pojo.po.Dept;
 import com.zhangkaigang.system.service.DeptService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -48,9 +50,34 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public void addDept(DeptDTO deptDTO) {
+    public void add(DeptDTO deptDTO) {
         Dept dept = PoJoConverterUtil.objectConverter(deptDTO, Dept.class);
         dept.setDeptId(idWorker.nextId());
         deptDao.insert(dept);
+    }
+
+    @Override
+    public void delete(Long deptId) {
+        List<Dept> deptList = selectByPid(deptId);
+        if(CollectionUtils.isNotEmpty(deptList)) {
+            for (Dept dept : deptList) {
+                delete(dept.getDeptId());
+            }
+        }
+        deptDao.deleteByPrimaryKey(deptId);
+
+    }
+
+    /**
+     * 根据父级ID查询部门列表
+     * @param pId
+     * @return
+     */
+    public List<Dept> selectByPid(Long pId) {
+        Example example = new Example(Dept.class);
+        Example.Criteria criteria = example.createCriteria();
+        // 添加条件
+        criteria.andEqualTo("pId", pId);
+        return deptDao.selectByExample(example);
     }
 }

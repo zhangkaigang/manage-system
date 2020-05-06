@@ -13,6 +13,15 @@ var commonFuns = {
         var projectName = pathName.substring(0,pathName.substr(1).indexOf('/')+1);
         return (localhostPaht + projectName);
     },
+    // 重新渲染表单
+    renderForm : function(){
+        layui.use('form', function(){
+            // 高版本建议把括号去掉，有的低版本，需要加()
+            var form = layui.form;
+            // 也可以单单初始化下拉框form.render('select');
+            form.render();
+        });
+    },
     // 封装ajax异步调用
     $Ajax : function(url, data){
         var returnDataTemp = {};
@@ -46,8 +55,8 @@ var commonFuns = {
                 icon : 1
             });
         }else{
-            if(data.messgae){
-                layer.msg(data.messgae, {icon: 5});
+            if(data.message){
+                layer.msg(data.message, {icon: 5});
             }else{
                 layer.msg(data.errMsg ? data.errMsg : '操作失败', {icon: 5});
             }
@@ -69,8 +78,8 @@ var commonFuns = {
                 icon : 1
             });
         }else{
-            if(data.messgae){
-                layer.msg(data.messgae, {icon: 5});
+            if(data.message){
+                layer.msg(data.message, {icon: 5});
             }else{
                 layer.msg(data.errMsg ? data.errMsg : '操作失败', {icon: 5});
             }

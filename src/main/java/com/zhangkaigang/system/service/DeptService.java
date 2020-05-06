@@ -37,5 +37,11 @@ public interface DeptService {
      * 新增部门
      * @param deptDTO
      */
-    void addDept(DeptDTO deptDTO);
+    void add(DeptDTO deptDTO);
+
+    /**
+     * 删除部门，删除本身和子部门
+     * @param deptId
+     */
+    void delete(Long deptId);
 }

@@ -60,6 +60,17 @@ body {
 .text-center{
     text-align: center;
 }
+.layui-input-radius{
+    border-radius: 30px;
+}
+/* skin */
+
+.layui-layer-default .layui-layer-title{background: #009f95; color:#fff; border: none;}
+.layui-layer-default .layui-layer-btn a{background: #009f95; border-color: #009f95;}
+.layui-layer-default .layui-layer-btn .layui-layer-btn1{background:#fff; border-color: #dedede;}
+
+
+
 /************************************** 全局 end ***********************************************/
 
 /************************************** 登录界面 start ***********************************************/

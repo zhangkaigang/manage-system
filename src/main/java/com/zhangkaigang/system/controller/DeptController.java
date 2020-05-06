@@ -13,6 +13,7 @@ import com.zhangkaigang.system.pojo.dto.DeptDTO;
 import com.zhangkaigang.system.service.DeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,8 +81,8 @@ public class DeptController {
      * 添加部门页面
      * @return
      */
-    @RequestMapping("/addDeptPage")
-    public String addDeptPage() {
+    @RequestMapping("/addPage")
+    public String addPage() {
         return PRIFIX + "dept_add";
     }
 
@@ -107,11 +108,37 @@ public class DeptController {
         return zTreeNodeList;
     }
 
-    @RequestMapping("/addDept")
+    /**
+     * 添加部门
+     * @param deptDTO
+     * @return
+     */
+    @RequestMapping("/add")
     @ResponseBody
     @ApiOperation(value = "添加部门", httpMethod = "POST")
-    public Result addDept(DeptDTO deptDTO) {
-        deptService.addDept(deptDTO);
+    public Result add(DeptDTO deptDTO) {
+        deptService.add(deptDTO);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 删除部门
+     * @param deptId
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestParam("deptId") Long deptId) {
+        deptService.delete(deptId);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 修改部门页面
+     * @return
+     */
+    @RequestMapping("/editPage")
+    public String editPage() {
+        return PRIFIX + "dept_edit";
     }
 }

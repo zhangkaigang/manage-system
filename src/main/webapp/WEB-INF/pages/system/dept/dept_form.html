@@ -1,0 +1,48 @@
+<formContent th:fragment="form">
+    <form id="deptForm" class="layui-form" action="">
+        <div>
+            <div class="layui-card-header">
+                基本信息
+            </div>
+            <div class="layui-card-body">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门简称<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" id="simpleName" name="simpleName" lay-verify="required" autocomplete="off" placeholder="请输入部门简称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门全称<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" id="fullName" name="fullName" lay-verify="required" autocomplete="off" placeholder="请输入部门全称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上级部门<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input id="pId" name="pId" type="hidden">
+                        <input readonly type="text" id="pName" name="pName" lay-verify="required" autocomplete="off" placeholder="请选择上级部门" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职责描述</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="description" name="description" autocomplete="off" placeholder="请输入部门职责描述" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">排序</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="sort" name="sort" lay-verify="int" autocomplete="off" placeholder="请输入部门排序" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-bottom text-center">
+            <button class="layui-btn" lay-filter="btnSave" data-type="btnSave" lay-submit>&emsp;保存&emsp;</button>
+            <div class="layui-btn layui-btn-primary" data-type="btnCancel">&emsp;取消&emsp;</div>
+        </div>
+
+    </form>
+</formContent>
