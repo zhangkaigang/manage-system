@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<div class="content-div">
+    <!-- 查询表单 start -->
+    <form id="positionSearchForm" class="layui-form layui-form-pane" method="post" action="">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <input placeholder="职位名称" name="deptName" autocomplete="off" class="layui-input" type="text"/>
+            </div>
+            <button class="layui-btn"  lay-submit="" data-type="btn-search" lay-filter="btn-search">
+                <i class="layui-icon">&#xe615;</i>查询
+            </button>
+        </div>
+    </form>
+    <!-- 查询表单 end -->
+
+    <!-- 工具栏 start -->
+    <button class="layui-btn" data-type="btnAdd" id="btnAdd">
+        <i class="layui-icon">&#xe654;</i>添加
+    </button>
+    <button class="layui-btn" onclick="">
+        <i class="layui-icon">&#xe67d;</i>导出
+    </button>
+    <!-- 工具栏 end -->
+
+    <!-- 表格 start -->
+    <table id="positionTable" lay-filter="positionTable"></table>
+    <!-- 表格 end -->
+</div>
+<script th:src="@{/js/pages/system/position/position.js}"></script>

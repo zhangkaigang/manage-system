@@ -17,6 +17,8 @@ body {
 }
 .content-div{
     margin: 1%;
+    height: 100%;
+    overflow: hidden;
 }
 .layui-layout-body {
     position: fixed;
@@ -345,6 +347,10 @@ body {
     right: 0;
     bottom: 0;
 }
+.content-page-body{
+    background-color: #fff
+}
+
 /************************************** 全局内容主体 end *************************************/
 
 

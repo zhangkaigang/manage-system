@@ -17,7 +17,6 @@ import javax.persistence.Table;
 public class Dept extends PublicPo {
 
 
-
     /**
      * 主键
      */
