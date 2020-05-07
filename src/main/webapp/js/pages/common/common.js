@@ -67,16 +67,16 @@ var commonFuns = {
     dealChildResult : function(returnData){
         var data = returnData.data;
         if(data.success){
-            // 刷新父页面
-            window.parent.location.reload();
             var index = parent.layer.getFrameIndex(window.name);
             // 关闭弹出层
             parent.layer.close(index);
-            layer.msg('操作成功', {
+            parent.layer.msg('操作成功', {
                 offset: 't',
                 time: 1000, //1s后自动关闭
                 icon : 1
             });
+            // 刷新父页面
+            window.parent.location.reload();
         }else{
             if(data.message){
                 layer.msg(data.message, {icon: 5});

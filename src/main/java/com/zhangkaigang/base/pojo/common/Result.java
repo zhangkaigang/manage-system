@@ -43,6 +43,12 @@ public class Result {
         this.message = message;
     }
 
+    public Result(Boolean success, Integer statusCode, Object data) {
+        this.success = success;
+        this.statusCode = statusCode;
+        this.data = data;
+    }
+
     public Result(Boolean success, Integer statusCode, String message, Object data) {
         this.success = success;
         this.statusCode = statusCode;

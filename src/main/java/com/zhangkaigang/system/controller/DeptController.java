@@ -16,11 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,5 +136,23 @@ public class DeptController {
     @RequestMapping("/editPage")
     public String editPage() {
         return PRIFIX + "dept_edit";
+    }
+
+    /**
+     * 根据部门id查询部门
+     * @param deptId
+     * @return
+     */
+    @RequestMapping("/findByDeptId/{deptId}")
+    @ResponseBody
+    public Result findByDeptId(@PathVariable("deptId") Long deptId) {
+        DeptDTO deptDTO = deptService.findByDeptId(deptId);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), deptDTO);
+    }
+
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Result edit() {
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 }

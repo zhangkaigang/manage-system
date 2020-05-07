@@ -38,6 +38,11 @@ public class DeptDTO {
      */
     private Integer sort;
 
+    /**
+     * 冗余字段-父级部门名称
+     */
+    private String pName;
+
     public Long getDeptId() {
         return deptId;
     }
@@ -84,5 +89,13 @@ public class DeptDTO {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 }

@@ -68,6 +68,13 @@ public class DeptServiceImpl implements DeptService {
 
     }
 
+    @Override
+    public DeptDTO findByDeptId(Long deptId) {
+        Dept dept = deptDao.selectByPrimaryKey(deptId);
+        DeptDTO deptDTO = PoJoConverterUtil.objectConverter(dept, DeptDTO.class);
+        return deptDTO;
+    }
+
     /**
      * 根据父级ID查询部门列表
      * @param pId

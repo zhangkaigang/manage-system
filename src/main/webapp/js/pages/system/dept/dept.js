@@ -68,7 +68,7 @@ layui.use(['tree', 'table'], function () {
             layer.open({
                 type: 2,
                 title : '添加部门',
-                area: ['800px', '550px'],
+                area: ['800px', '500px'],
                 content: contextPath + '/sys/dept/addPage'
             });
         }
@@ -78,10 +78,13 @@ layui.use(['tree', 'table'], function () {
     table.on('tool('+ dept.tableId +')', function(obj){
         var selectData = obj.data;
         if(obj.event === 'btnEdit'){
+            param = {
+                selectData : selectData
+            };
             layer.open({
                 type: 2,
                 title : '修改部门',
-                area: ['800px', '550px'],
+                area: ['800px', '500px'],
                 content: contextPath + '/sys/dept/editPage'
             });
         } else if (obj.event === 'btnDelete') {

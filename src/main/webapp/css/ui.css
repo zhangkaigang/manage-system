@@ -361,6 +361,9 @@ body {
 .content-page-body{
     background-color: #fff
 }
+.layui-form-pane .layui-input-inline {
+    margin-left: 0;
+}
 
 /************************************** 全局内容主体 end *************************************/
 

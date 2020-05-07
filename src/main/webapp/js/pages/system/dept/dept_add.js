@@ -10,7 +10,7 @@ layui.use(['layer', 'form'], function () {
         layer.open({
             type: 2,
             title: '父级部门',
-            area: ['400px', '450px'],
+            area: ['400px', '420px'],
             content: contextPath + '/sys/dept/deptTreePage',
             end: function () {
                 var selectedNode = deptAdd.selectedNode;
@@ -27,7 +27,8 @@ layui.use(['layer', 'form'], function () {
         var type = $(this).data('type');
         deptAddFuns[type] ? deptAddFuns[type].call(this) : '';
     });
-    
+
+    // 自定义函数
     var deptAddFuns = {
         // 保存
         btnSave : function () {

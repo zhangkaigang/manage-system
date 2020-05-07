@@ -44,4 +44,11 @@ public interface DeptService {
      * @param deptId
      */
     void delete(Long deptId);
+
+    /**
+     * 根据部门ID查找部门
+     * @param deptId
+     * @return
+     */
+    DeptDTO findByDeptId(Long deptId);
 }
