@@ -1,6 +1,7 @@
 package com.zhangkaigang.system.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.zhangkaigang.base.constant.CacheFactory;
 import com.zhangkaigang.base.enums.StatusCodeEnum;
 import com.zhangkaigang.base.pojo.common.Result;
 import com.zhangkaigang.base.pojo.node.LayuiTreeFactory;
@@ -13,12 +14,10 @@ import com.zhangkaigang.system.pojo.dto.DeptDTO;
 import com.zhangkaigang.system.service.DeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +35,9 @@ public class DeptController {
 
     @Autowired
     private DeptService deptService;
+
+    @Autowired
+    private CacheFactory cacheFactory;
 
     /**
      * 部门管理页面
@@ -147,6 +149,7 @@ public class DeptController {
     @ResponseBody
     public Result findByDeptId(@PathVariable("deptId") Long deptId) {
         DeptDTO deptDTO = deptService.findByDeptId(deptId);
+        deptDTO.setpName(cacheFactory.getDeptName(deptDTO.getpId()));
         return new Result(true, StatusCodeEnum.OK.getStatusCode(), deptDTO);
     }
 

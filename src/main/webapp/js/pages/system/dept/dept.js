@@ -79,7 +79,7 @@ layui.use(['tree', 'table'], function () {
         var selectData = obj.data;
         if(obj.event === 'btnEdit'){
             param = {
-                selectData : selectData
+                deptId : selectData.deptId
             };
             layer.open({
                 type: 2,
