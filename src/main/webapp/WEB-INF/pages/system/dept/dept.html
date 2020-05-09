@@ -3,44 +3,41 @@
 <!--head部分-->
 <head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
 
-    <div class="dept-div">
-        <div class="dept-tree-div  bg-white" id="deptTree">
+    <div class="content-contain-tree-div">
+        <div class="content-left-tree-div  bg-white" id="deptTree">
 
         </div>
-        <div class="dept-content-div bg-white">
+        <div class="content-right-content-div bg-white">
             <div class="content-div">
-                <!-- 查询表单 start -->
-                <form id="deptSearchForm" class="layui-form layui-form-pane" method="post" action="">
-                    <div class="layui-form-item">
+                <!-- 内容头部 start -->
+                <div class="content-head-div">
+                    <div class="content-head-search-div">
                         <div class="layui-input-inline">
-                            <input placeholder="部门名称" name="deptName" autocomplete="off" class="layui-input" type="text"/>
+                            <input type="text" id="searchName" class="layui-input layui-input-radius search-file-input"
+                                   placeholder="输入部门名称搜索" onfocus="this.placeholder=''" onblur="this.placeholder='输入部门名称搜索'"/>
+                            <span class="iconfont icon-search-file" id="btnSearch">&#xe627;</span>
                         </div>
-                        <button class="layui-btn"  lay-submit="" data-type="btn-search" lay-filter="btn-search">
-                        <i class="layui-icon">&#xe615;</i>查询
-                        </button>
                     </div>
-                </form>
-                <!-- 查询表单 end -->
-
-                <!-- 工具栏 start -->
-                <button class="layui-btn" data-type="btnAdd">
-                    <i class="layui-icon">&#xe654;</i>添加
-                </button>
-               <!-- <button class="layui-btn" data-type="btnEdit">
-                    <i class="layui-icon">&#xe642;</i>修改
-                </button>
-                <button class="layui-btn" data-type="btnDel">
-                    <i class="layui-icon">&#xe640;</i>删除
-                </button>-->
-                <button class="layui-btn" data-type="btnExport">
-                    <i class="layui-icon">&#xe67d;</i>导出
-                </button>
-                <!-- 工具栏 end -->
-
-                <!-- 表格 start -->
-                <table id="deptTable" lay-filter="deptTable"></table>
-                <!-- 表格 end -->
-
+                    <!-- 工具栏按钮 start -->
+                    <div class="content-head-btn-div">
+                        <!-- 工具栏 start -->
+                        <button class="layui-btn" data-type="btnAdd">
+                            <i class="layui-icon">&#xe654;</i>添加
+                        </button>
+                        <button class="layui-btn" data-type="btnExport">
+                            <i class="layui-icon">&#xe67d;</i>导出
+                        </button>
+                        <!-- 工具栏 end -->
+                    </div>
+                </div>
+                <!-- 主体内容 start -->
+                <div class="content-body-div">
+                    <div>
+                        <!-- 表格 start -->
+                        <table id="deptTable" lay-filter="deptTable"></table>
+                        <!-- 表格 end -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>

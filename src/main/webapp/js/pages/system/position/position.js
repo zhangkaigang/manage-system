@@ -18,7 +18,7 @@ layui.use(['layer', 'form', 'table'], function () {
 
     // 渲染表格
     tableIns = table.render({
-        height: 'full-120',
+        height: 'full-90',
         id: position.tableId,
         elem: '#' + position.tableId,
         url: contextPath + '/sys/position/list',

@@ -15,11 +15,6 @@ body {
 .bg-white {
     background-color: #fff;
 }
-.content-div{
-    margin: 1%;
-    height: 100%;
-    overflow: hidden;
-}
 .layui-layout-body {
     position: fixed;
     left: 0;
@@ -38,6 +33,80 @@ body {
     bottom: 0;
     transition: all .3s ease
 }
+.content-div{
+    position: absolute;
+    margin: 1%;
+    background-color: #fff;
+    height: 94%;
+    width: 96%;
+    padding: 10px;
+    overflow: hidden;
+}
+.content-contain-tree-div{
+    margin: 1%;
+    height: 100%;
+    overflow: hidden;
+}
+.content-left-tree-div{
+    position: absolute;
+    margin: 0px;
+    left: 0px;
+    right: auto;
+    top: 15px;
+    bottom: 0px;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    width: 20%;
+    display: block;
+    visibility: visible;
+}
+.content-right-content-div{
+    position: absolute;
+    margin: 0px;
+    right: 12px;
+    top: 15px;
+    bottom: 0px;
+    height: 100%;
+    width: 78%;
+    z-index: 0;
+    display: block;
+    visibility: visible;
+}
+
+.content-head-div{
+    width: 100%;
+}
+.content-head-search-div{
+    float: right;
+    /*margin-right: 25px;*/
+}
+.search-file-input{
+    background-color: #f1f2f4;
+    width: 230px;
+}
+.icon-search-file{
+    position: absolute;
+    top:10px;
+    right: 14px;
+}
+.content-head-btn-div{
+
+}
+.table-no-border-div .layui-table-view{
+    border: 0;
+}
+.content-head-btn-div button{
+    border-radius: 5px;
+    border-color: #09AAFF;
+}
+.content-head-btn-div .iconfont{
+    font-size: 20px;
+    vertical-align: bottom;
+    font-weight: bold;
+    color: #09AAFF;
+}
+
 .layer-open-title{
     color: #fff;
     height: 50px;
@@ -369,37 +438,8 @@ body {
 
 
 /************************************** 部门管理 start ************************************************/
-.dept-div{
-    margin: 1%;
-    height: 100%;
-    overflow: hidden;
-}
-.dept-tree-div{
-    position: absolute;
-    margin: 0px;
-    left: 0px;
-    right: auto;
-    top: 15px;
-    bottom: 0px;
-    height: 100%;
-    z-index: 0;
-    overflow: hidden;
-    width: 20%;
-    display: block;
-    visibility: visible;
-}
-.dept-content-div{
-    position: absolute;
-    margin: 0px;
-    right: 12px;
-    top: 15px;
-    bottom: 0px;
-    height: 100%;
-    width: 78%;
-    z-index: 0;
-    display: block;
-    visibility: visible;
-}
+
+
 
 /************************************** 部门管理 end ************************************************/
 

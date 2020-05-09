@@ -1,4 +1,4 @@
-var tableIns, pageCurr;
+var tableIns;
 var dept = {
     treeId: 'deptTree',
     tableId: 'deptTable',
@@ -38,7 +38,7 @@ layui.use(['tree', 'table'], function () {
 
     // 渲染表格
     tableIns = table.render({
-        height: 'full-120',
+        height: 'full-90',
         id: dept.tableId,
         elem: '#' + dept.tableId,
         url: contextPath + '/sys/dept/list',
@@ -50,7 +50,7 @@ layui.use(['tree', 'table'], function () {
             limits:[10, 50, 100, 200]
         },
         done: function(res, curr, count){
-            pageCurr = curr;
+
         }
 
     });
