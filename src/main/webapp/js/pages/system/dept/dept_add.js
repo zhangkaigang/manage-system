@@ -1,25 +1,12 @@
-var deptAdd = {
-    selectedNode : {}
-};
+var selectedNode = {};
+var layer, form;
 layui.use(['layer', 'form'], function () {
-    var layer = layui.layer;
-    var form = layui.form;
+    layer = layui.layer;
+    form = layui.form;
 
     // 点击上级部门时
     $('#pName').click(function () {
-        layer.open({
-            type: 2,
-            title: '父级部门',
-            area: ['400px', '420px'],
-            content: contextPath + '/sys/dept/deptTreePage',
-            end: function () {
-                var selectedNode = deptAdd.selectedNode;
-                if (selectedNode && JSON.stringify(selectedNode) != '{}') {
-                    $("#pId").val(selectedNode.id);
-                    $("#pName").val(selectedNode.name);
-                }
-            }
-        });
+        commonFuns.openDeptTree();
     });
 
     // 按钮点击事件

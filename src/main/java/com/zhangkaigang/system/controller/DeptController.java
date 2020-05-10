@@ -68,8 +68,9 @@ public class DeptController {
     @RequestMapping("/list")
     @ResponseBody
     @ApiOperation(value = "部门列表", httpMethod = "GET")
-    public LayuiPageInfo list(DeptDTO deptDTO) {
-        PageInfo<DeptDTO> pageInfo = deptService.list();
+    public LayuiPageInfo list(@RequestParam(value = "deptName", required = false) String deptName,
+                              @RequestParam(value = "deptId", required = false) Long deptId) {
+        PageInfo<DeptDTO> pageInfo = deptService.list(deptName, deptId);
         LayuiPageInfo layuiPageInfo = LayuiPageFactory.createPageInfo(pageInfo.getTotal(), pageInfo.getList());
         return layuiPageInfo;
     }
@@ -153,9 +154,14 @@ public class DeptController {
         return new Result(true, StatusCodeEnum.OK.getStatusCode(), deptDTO);
     }
 
+    /**
+     * 编辑
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
-    public Result edit() {
+    public Result edit(DeptDTO deptDTO) {
+        deptService.edit(deptDTO);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 }

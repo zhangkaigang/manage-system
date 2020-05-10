@@ -1,34 +1,34 @@
+var cols = [[
+    {type: 'checkbox'},
+    {field: 'deptId', hide: true, sort: true, title: 'id'},
+    {field: 'simpleName', align: "center", sort: true, title: '部门简称'},
+    {field: 'fullName', align: "center", sort: true, title: '部门全称'},
+    {field: 'sort', align: "center", sort: true, title: '排序'},
+    {field: 'description', align: "center", sort: true, title: '备注'},
+    {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 150}
+]];
 var tableIns;
-var dept = {
-    treeId: 'deptTree',
-    tableId: 'deptTable',
-    initCols: [[
-        {type: 'checkbox'},
-        {field: 'deptId', hide: true, sort: true, title: 'id'},
-        {field: 'simpleName', align: "center", sort: true, title: '部门简称'},
-        {field: 'fullName', align: "center", sort: true, title: '部门全称'},
-        {field: 'sort', align: "center", sort: true, title: '排序'},
-        {field: 'description', align: "center", sort: true, title: '备注'},
-        {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 150}
-    ]],
-    condition: {
-        deptId: ""
-    }
+var treeId = 'deptTree', tableId = 'deptTable';
+var condition = {
+    deptId : ''
 };
+var tree, table;
 layui.use(['tree', 'table'], function () {
-    var tree = layui.tree;
-    var table = layui.table;
+    tree = layui.tree;
+    table = layui.table;
     var returnDataTemp = commonFuns.$Ajax(contextPath + '/sys/dept/getDeptLayuiTree');
     var returnData = returnDataTemp.data;
     if (returnData) {
         // 仅节点左侧图标控制收缩
         tree.render({
-            elem: '#' + dept.treeId,
+            elem: '#' + treeId,
             data: returnData,
             // 是否仅允许节点左侧图标控制展开收缩
             onlyIconControl: true,
             click: function(obj){
-                console.log(JSON.stringify(obj.data))
+                var data = obj.data;
+                condition.deptId = data.id;
+                deptFuns.search();
             }
         });
     } else {
@@ -39,10 +39,10 @@ layui.use(['tree', 'table'], function () {
     // 渲染表格
     tableIns = table.render({
         height: 'full-90',
-        id: dept.tableId,
-        elem: '#' + dept.tableId,
+        id: tableId,
+        elem: '#' + tableId,
         url: contextPath + '/sys/dept/list',
-        cols: dept.initCols,
+        cols: cols,
         method:'post',
         where:{},
         page: {
@@ -55,6 +55,18 @@ layui.use(['tree', 'table'], function () {
 
     });
 
+    // 搜索
+    $('#btnSearch').on('click', function () {
+        var deptName = $('#searchName').val();
+        deptFuns.search();
+    });
+    // 搜索输入框回车事件
+    $('#searchName').bind('keypress', function (event) {
+        if (event.keyCode == "13") {
+            deptFuns.search();
+        }
+    })
+
     // 按钮点击事件
     $('.layui-btn').on('click', function(){
         var type = $(this).data('type');
@@ -62,6 +74,15 @@ layui.use(['tree', 'table'], function () {
     });
     // 自定义函数
     var deptFuns = {
+        // 搜索
+        search : function() {
+            tableIns.reload({
+                where:{
+                    deptName : $('#searchName').val().trim(),
+                    deptId : condition.deptId
+                }
+            });
+        },
         // 添加
         btnAdd : function () {
             // 页面层
@@ -75,7 +96,7 @@ layui.use(['tree', 'table'], function () {
     };
 
     // 监听行工具事件
-    table.on('tool('+ dept.tableId +')', function(obj){
+    table.on('tool('+ tableId +')', function(obj){
         var selectData = obj.data;
         if(obj.event === 'btnEdit'){
             param = {
@@ -92,7 +113,6 @@ layui.use(['tree', 'table'], function () {
                     btn: ['确定', '取消']
                 }, function (index, layero) {
                     var returnData = commonFuns.$Ajax(contextPath + "/sys/dept/delete", {"deptId" : selectData.deptId});
-                    console.log(returnData)
                     commonFuns.dealResult(returnData);
                 }
             );

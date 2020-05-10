@@ -23,9 +23,11 @@ public interface DeptService {
 
     /**
      * 部门列表分页
+     * @param deptName
+     * @param deptId
      * @return
      */
-    PageInfo<DeptDTO> list();
+    PageInfo<DeptDTO> list(String deptName, Long deptId);
 
     /**
      * 获取ztree风格的部门树
@@ -51,4 +53,10 @@ public interface DeptService {
      * @return
      */
     DeptDTO findByDeptId(Long deptId);
+
+    /**
+     * 编辑部门
+     * @param deptDTO
+     */
+    void edit(DeptDTO deptDTO);
 }

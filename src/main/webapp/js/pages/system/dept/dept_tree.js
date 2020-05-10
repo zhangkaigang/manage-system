@@ -37,9 +37,9 @@ function zTreeOnAsyncSuccess (event, treeId, msg) {
     treeObj.expandAll(true);
 }
 
-
+var layer;
 layui.use(['layer'], function() {
-    var layer = layui.layer;
+    layer = layui.layer;
     // 初始化部门树
     $.fn.zTree.init($("#" + deptTree.treeId), deptTree.setting, null);
 
@@ -48,7 +48,7 @@ layui.use(['layer'], function() {
         // 获取光标选中的节点
         var treeObj = $.fn.zTree.getZTreeObj(deptTree.treeId);
         var selectedNodes = treeObj.getSelectedNodes();
-        window.parent.deptAdd.selectedNode = selectedNodes[0];
+        window.parent.selectedNode = selectedNodes[0];
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
     });

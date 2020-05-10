@@ -38,8 +38,8 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public PageInfo<DeptDTO> list() {
-        List<Dept> deptList = deptDao.selectAll();
+    public PageInfo<DeptDTO> list(String deptName, Long deptId) {
+        List<Dept> deptList = deptDao.list(deptName, deptId);
         List<DeptDTO> deptDTOList = PoJoConverterUtil.objectListConverter(deptList, DeptDTO.class);
         return LayuiPageFactory.getPageInfo(deptDTOList);
     }
@@ -86,5 +86,11 @@ public class DeptServiceImpl implements DeptService {
         // 添加条件
         criteria.andEqualTo("pId", pId);
         return deptDao.selectByExample(example);
+    }
+
+    @Override
+    public void edit(DeptDTO deptDTO) {
+        Dept dept = PoJoConverterUtil.objectConverter(deptDTO, Dept.class);
+        deptDao.updateByPrimaryKey(dept);
     }
 }
