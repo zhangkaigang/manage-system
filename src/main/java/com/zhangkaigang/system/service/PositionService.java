@@ -13,13 +13,26 @@ public interface PositionService {
 
     /**
      * 职位列表分页
+     * @param name
      * @return
      */
-    PageInfo<PositionDTO> list();
+    PageInfo<PositionDTO> list(String name);
 
     /**
      * 新增职位
      * @param positionDTO
      */
-    void addPosition(PositionDTO positionDTO);
+    void add(PositionDTO positionDTO);
+
+    /**
+     * 删除
+     * @param positionIds
+     */
+    void delete(String positionIds);
+
+    /**
+     * 编辑职位
+     * @param positionDTO
+     */
+    void edit(PositionDTO positionDTO);
 }

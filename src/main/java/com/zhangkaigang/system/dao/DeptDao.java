@@ -24,14 +24,14 @@ public interface DeptDao extends Mapper<Dept> {
      * 获取layui风格的部门树
      * @return
      */
-    @Select("select dept_id id, p_id pId, simple_name title, case when p_id = 0 then 'true' else 'false' end as spread from sys_dept")
+    @Select("select dept_id id, parent_id pId, simple_name title, case when parent_id = 0 then 'true' else 'false' end as spread from sys_dept")
     List<LayuiTreeNode> getDeptLayuiTree();
 
     /**
      * 获取ztree部门树
      * @return
      */
-    @Select("select dept_id id, p_id pId, simple_name name, full_name title, case when p_id = 0 then 'true' else 'false' end as open from sys_dept")
+    @Select("select dept_id id, parent_id pId, simple_name name, full_name title, case when parent_id = 0 then 'true' else 'false' end as open from sys_dept")
     List<ZTreeNode> getDeptZTree();
 
     /**

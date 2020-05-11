@@ -15,8 +15,8 @@ layui.use(['layer', 'form'], function () {
             // 监听表单提交
             form.on('submit(btnSave)', function(data){
                 var formVal = data.field;
-                var returnData = commonFuns.$Ajax( contextPath + "/sys/position/addPosition", formVal);
-                commonFuns.dealChildResult(returnData);
+                var returnDataTemp = commonFuns.$Ajax( contextPath + "/sys/position/add", formVal);
+                commonFuns.dealChildResult(returnDataTemp);
                 return false;
             });
         },

@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -28,7 +29,7 @@ public class PositionController {
     private PositionService positionService;
 
     /**
-     * 部门管理页面
+     * 职位管理页面
      * @return
      */
     @RequestMapping("")
@@ -37,13 +38,14 @@ public class PositionController {
     }
 
     /**
-     * 部门列表
+     * 职位列表
+     * @param name
      * @return
      */
     @RequestMapping("/list")
     @ResponseBody
-    public LayuiPageInfo list() {
-        PageInfo<PositionDTO> pageInfo = positionService.list();
+    public LayuiPageInfo list(@RequestParam(value = "name", required = false) String name) {
+        PageInfo<PositionDTO> pageInfo = positionService.list(name);
         LayuiPageInfo layuiPageInfo = LayuiPageFactory.createPageInfo(pageInfo.getTotal(), pageInfo.getList());
         return layuiPageInfo;
     }
@@ -52,8 +54,8 @@ public class PositionController {
      * 添加职位页面
      * @return
      */
-    @RequestMapping("/addPositionPage")
-    public String addPositionPage() {
+    @RequestMapping("/addPage")
+    public String addPage() {
         return PRIFIX + "position_add";
     }
 
@@ -62,13 +64,46 @@ public class PositionController {
      * @param positionDTO
      * @return
      */
-    @RequestMapping("/addPosition")
+    @RequestMapping("/add")
     @ResponseBody
     @ApiOperation(value = "添加职位", httpMethod = "POST")
-    public Result addPosition(PositionDTO positionDTO) {
-        positionService.addPosition(positionDTO);
+    public Result add(PositionDTO positionDTO) {
+        positionService.add(positionDTO);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 
+    /**
+     * 删除
+     * @param positionIds
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestParam(value = "positionIds", required = false) String positionIds){
+        positionService.delete(positionIds);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 编辑页面
+     * @return
+     */
+    @RequestMapping("/editPage")
+    public String editPage() {
+        return PRIFIX + "position_edit";
+    }
+
+    /**
+     * 编辑
+     * @param positionDTO
+     * @return
+     */
+    @RequestMapping("/edit")
+    @ResponseBody
+    @ApiOperation(value = "编辑职位", httpMethod = "POST")
+    public Result edit(PositionDTO positionDTO) {
+        positionService.edit(positionDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
 
 }

@@ -17,8 +17,8 @@
             <button class="layui-btn" data-type="btnAdd">
                 <i class="layui-icon">&#xe654;</i>添加
             </button>
-            <button class="layui-btn" data-type="btnExport">
-                <i class="layui-icon">&#xe67d;</i>导出
+            <button class="layui-btn" data-type="btnDelete">
+                <i class="layui-icon">&#xe640;</i>删除
             </button>
         </div>
         <!-- 工具栏按钮 end -->
@@ -36,4 +36,12 @@
     <!-- 主体内容 end -->
 
 </div>
+
+<script type="text/html" id="btnBar">
+    <a class="layui-btn layui-btn-xs" lay-event="btnEdit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="btnDelete">删除</a>
+</script>
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="status" value="{{d.positionId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='ENABLE'?'checked':''}} />
+</script>
 <script th:src="@{/js/pages/system/position/position.js}"></script>

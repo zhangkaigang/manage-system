@@ -5,7 +5,7 @@ layui.use(['layer', 'form'], function () {
     form = layui.form;
 
     // 点击上级部门时
-    $('#pName').click(function () {
+    $('#parentName').click(function () {
         commonFuns.openDeptTree();
     });
 
@@ -22,8 +22,8 @@ layui.use(['layer', 'form'], function () {
             // 监听表单提交
             form.on('submit(btnSave)', function(data){
                 var formVal = data.field;
-                var returnData = commonFuns.$Ajax( contextPath + "/sys/dept/add", formVal);
-                commonFuns.dealChildResult(returnData);
+                var returnDataTemp = commonFuns.$Ajax( contextPath + "/sys/dept/add", formVal);
+                commonFuns.dealChildResult(returnDataTemp);
                 return false;
             });
         },

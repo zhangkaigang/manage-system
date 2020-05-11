@@ -27,8 +27,8 @@ public class Dept extends PublicPo {
     /**
      * 父部门id
      */
-    @Column(name = "p_id")
-    private Long pId;
+    @Column(name = "parent_id")
+    private Long parentId;
 
     /**
      * 部门简称
@@ -62,12 +62,12 @@ public class Dept extends PublicPo {
         this.deptId = deptId;
     }
 
-    public Long getpId() {
-        return pId;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setpId(Long pId) {
-        this.pId = pId;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getSimpleName() {

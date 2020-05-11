@@ -17,7 +17,7 @@ layui.use(['tree', 'table'], function () {
     tree = layui.tree;
     table = layui.table;
     var returnDataTemp = commonFuns.$Ajax(contextPath + '/sys/dept/getDeptLayuiTree');
-    var returnData = returnDataTemp.data;
+    var returnData = returnDataTemp.returnData;
     if (returnData) {
         // 仅节点左侧图标控制收缩
         tree.render({
@@ -32,7 +32,8 @@ layui.use(['tree', 'table'], function () {
             }
         });
     } else {
-        layer.msg(returnDataTemp.errMsg ? returnDataTemp.errMsg : '加载部门树失败', {icon: 5});
+        returnDataTemp.errMsg = "加载部门树失败";
+        commonFuns.errorInfo(returnDataTemp);
         return false;
     }
 
@@ -57,7 +58,6 @@ layui.use(['tree', 'table'], function () {
 
     // 搜索
     $('#btnSearch').on('click', function () {
-        var deptName = $('#searchName').val();
         deptFuns.search();
     });
     // 搜索输入框回车事件
@@ -65,7 +65,7 @@ layui.use(['tree', 'table'], function () {
         if (event.keyCode == "13") {
             deptFuns.search();
         }
-    })
+    });
 
     // 按钮点击事件
     $('.layui-btn').on('click', function(){
@@ -112,8 +112,8 @@ layui.use(['tree', 'table'], function () {
             layer.confirm('是否删除该部门以及其所有子部门？', {
                     btn: ['确定', '取消']
                 }, function (index, layero) {
-                    var returnData = commonFuns.$Ajax(contextPath + "/sys/dept/delete", {"deptId" : selectData.deptId});
-                    commonFuns.dealResult(returnData);
+                    var returnDataTemp = commonFuns.$Ajax(contextPath + "/sys/dept/delete", {"deptId" : selectData.deptId});
+                    commonFuns.dealResult(returnDataTemp);
                 }
             );
         }

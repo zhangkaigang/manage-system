@@ -16,7 +16,7 @@ public class DeptDTO {
     /**
      * 父部门id
      */
-    private Long pId;
+    private Long parentId;
 
     /**
      * 部门简称
@@ -41,7 +41,7 @@ public class DeptDTO {
     /**
      * 冗余字段-父级部门名称
      */
-    private String pName;
+    private String parentName;
 
     public Long getDeptId() {
         return deptId;
@@ -51,12 +51,12 @@ public class DeptDTO {
         this.deptId = deptId;
     }
 
-    public Long getpId() {
-        return pId;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setpId(Long pId) {
-        this.pId = pId;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getSimpleName() {
@@ -91,11 +91,11 @@ public class DeptDTO {
         this.sort = sort;
     }
 
-    public String getpName() {
-        return pName;
+    public String getParentName() {
+        return parentName;
     }
 
-    public void setpName(String pName) {
-        this.pName = pName;
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

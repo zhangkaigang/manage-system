@@ -8,9 +8,13 @@ import com.zhangkaigang.system.dao.PositionDao;
 import com.zhangkaigang.system.pojo.dto.PositionDTO;
 import com.zhangkaigang.system.pojo.po.Position;
 import com.zhangkaigang.system.service.PositionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -30,17 +34,39 @@ public class PositionServiceImpl implements PositionService {
     private IdWorker idWorker;
 
     @Override
-    public PageInfo<PositionDTO> list() {
-        List<Position> positionList = positionDao.selectAll();
+    public PageInfo<PositionDTO> list(String name) {
+        Example example = new Example(Position.class);
+        if(StringUtils.isNotEmpty(name)) {
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andLike("name", "%" + name + "%");
+        }
+        example.orderBy("sort").asc();
+        List<Position> positionList = positionDao.selectByExample(example);
         List<PositionDTO> deptDTOList = PoJoConverterUtil.objectListConverter(positionList, PositionDTO.class);
         return LayuiPageFactory.getPageInfo(deptDTOList);
     }
 
     @Override
-    public void addPosition(PositionDTO positionDTO) {
+    public void add(PositionDTO positionDTO) {
         Position position = PoJoConverterUtil.objectConverter(positionDTO, Position.class);
         position.setPositionId(idWorker.nextId());
         position.setCreateTime(new Date());
-        positionDao.insert(position);
+        positionDao.insertSelective(position);
+    }
+
+    @Override
+    public void delete(String positionIds) {
+        List<Long> positionIdsList = StringUtils.isNotEmpty(positionIds) ?
+                new ArrayList(Arrays.asList(positionIds.split(","))) : new ArrayList<>();
+        Example example = new Example(Position.class);
+        Example.Criteria criteria = example.createCriteria();
+        // Arrays.asList，则不能用remove和add这样的方法，因为其返回的类型是 Aarrays$ArrayList 并不是 ArrayList
+        criteria.andIn("positionId", positionIdsList);
+        positionDao.deleteByExample(example);
+    }
+
+    @Override
+    public void edit(PositionDTO positionDTO) {
+
     }
 }

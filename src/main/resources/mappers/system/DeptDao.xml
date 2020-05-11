@@ -3,7 +3,7 @@
 <mapper namespace="com.zhangkaigang.system.dao.DeptDao">
     <resultMap id="BaseResultMap" type="com.zhangkaigang.system.pojo.po.Dept">
         <id column="dept_id"  property="deptId"/>
-        <result column="p_id"  property="pId"/>
+        <result column="parent_id"  property="parentId"/>
         <result column="simple_name"  property="simpleName"/>
         <result column="full_name"  property="fullName"/>
         <result column="description"  property="description"/>
@@ -16,7 +16,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        dept_id , p_id, simple_name, full_name,  description, sort,  create_op, create_time, modify_op, modify_time
+        dept_id , parent_id, simple_name, full_name,  description, sort,  create_op, create_time, modify_op, modify_time
     </sql>
 
     <select id="list" resultMap="BaseResultMap">

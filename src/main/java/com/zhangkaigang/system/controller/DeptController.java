@@ -150,7 +150,7 @@ public class DeptController {
     @ResponseBody
     public Result findByDeptId(@PathVariable("deptId") Long deptId) {
         DeptDTO deptDTO = deptService.findByDeptId(deptId);
-        deptDTO.setpName(cacheFactory.getDeptName(deptDTO.getpId()));
+        deptDTO.setParentName(cacheFactory.getDeptName(deptDTO.getParentId()));
         return new Result(true, StatusCodeEnum.OK.getStatusCode(), deptDTO);
     }
 

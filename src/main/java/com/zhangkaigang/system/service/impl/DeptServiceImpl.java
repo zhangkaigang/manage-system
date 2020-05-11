@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,13 +53,14 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public void add(DeptDTO deptDTO) {
         Dept dept = PoJoConverterUtil.objectConverter(deptDTO, Dept.class);
+        dept.setCreateTime(new Date());
         dept.setDeptId(idWorker.nextId());
-        deptDao.insert(dept);
+        deptDao.insertSelective(dept);
     }
 
     @Override
     public void delete(Long deptId) {
-        List<Dept> deptList = selectByPid(deptId);
+        List<Dept> deptList = selectByParentId(deptId);
         if(CollectionUtils.isNotEmpty(deptList)) {
             for (Dept dept : deptList) {
                 delete(dept.getDeptId());
@@ -77,20 +79,21 @@ public class DeptServiceImpl implements DeptService {
 
     /**
      * 根据父级ID查询部门列表
-     * @param pId
+     * @param parentId
      * @return
      */
-    public List<Dept> selectByPid(Long pId) {
+    public List<Dept> selectByParentId(Long parentId) {
         Example example = new Example(Dept.class);
         Example.Criteria criteria = example.createCriteria();
         // 添加条件
-        criteria.andEqualTo("pId", pId);
+        criteria.andEqualTo("parentId", parentId);
         return deptDao.selectByExample(example);
     }
 
     @Override
     public void edit(DeptDTO deptDTO) {
         Dept dept = PoJoConverterUtil.objectConverter(deptDTO, Dept.class);
-        deptDao.updateByPrimaryKey(dept);
+        dept.setModifyTime(new Date());
+        deptDao.updateByPrimaryKeySelective(dept);
     }
 }

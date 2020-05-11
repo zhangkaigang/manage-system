@@ -25,6 +25,8 @@ var commonFuns = {
     // 封装ajax异步调用
     $Ajax : function(url, data){
         var returnDataTemp = {};
+        returnDataTemp.successMsg = "";
+        returnDataTemp.errMsg = "";
         $.ajax({
             type : 'post',
             url : url,
@@ -32,58 +34,72 @@ var commonFuns = {
             data : data,
             dataType : 'json',
             success : function(data){
-                returnDataTemp.data = data;
+                returnDataTemp.returnData = data;
             },
             error: function (response) {
                 var responseTextObj = JSON.parse(response.responseText)
                 if(responseTextObj.errcode == 403) {
-                    returnDataTemp.errMsg = "您没有此操作权限，请确认";
+                    returnDataTemp.errCodeMsg = "您没有此操作权限，请确认";
                 }
             }
         });
         return returnDataTemp;
     },
     // 处理结果
-    dealResult : function(returnData){
-        var data = returnData.data;
-        if(data.success){
+    dealResult : function(returnDataTemp){
+        var returnData = returnDataTemp.returnData;
+        if(returnData.success){
+            commonFuns.successInfo(returnDataTemp);
             // 刷新页面
             window.location.reload();
-            layer.msg('操作成功', {
-                offset: 't',
-                time: 1000, //1s后自动关闭
-                icon : 1
-            });
         }else{
-            if(data.message){
-                layer.msg(data.message, {icon: 5});
-            }else{
-                layer.msg(data.errMsg ? data.errMsg : '操作失败', {icon: 5});
-            }
+            commonFuns.errorInfo(returnDataTemp);
             return false;
         }
     },
     // 处理子页面结果
-    dealChildResult : function(returnData){
-        var data = returnData.data;
-        if(data.success){
-            var index = parent.layer.getFrameIndex(window.name);
-            // 关闭弹出层
-            parent.layer.close(index);
-            parent.layer.msg('操作成功', {
-                offset: 't',
-                time: 1000, //1s后自动关闭
-                icon : 1
-            });
+    dealChildResult : function(returnDataTemp){
+        var returnData = returnDataTemp.returnData;
+        if(returnData.success){
+            commonFuns.childSuccessInfo(returnDataTemp);
             // 刷新父页面
             window.parent.location.reload();
         }else{
-            if(data.message){
-                layer.msg(data.message, {icon: 5});
-            }else{
-                layer.msg(data.errMsg ? data.errMsg : '操作失败', {icon: 5});
-            }
+            commonFuns.errorInfo(returnDataTemp);
             return false;
+        }
+    },
+    // 页面成功提示信息
+    successInfo : function(returnDataTemp) {
+        var successMsg = returnDataTemp.successMsg;
+        layer.msg(successMsg ? successMsg : '操作成功', {
+            offset: 't',
+            time: 1, //1ms后自动关闭
+            icon : 1
+        });
+
+    },
+    // 子页面成功提示信息
+    childSuccessInfo : function(returnDataTemp) {
+        var successMsg = returnDataTemp.successMsg;
+        var index = parent.layer.getFrameIndex(window.name);
+        // 关闭弹出层
+        parent.layer.close(index);
+        parent.layer.msg(successMsg ? successMsg : '操作成功', {
+            offset: 't',
+            time: 1, //1ms后自动关闭
+            icon : 1
+        });
+    },
+    // 错误信息提示信息
+    errorInfo : function(returnDataTemp) {
+        var returnData = returnDataTemp.returnData;
+        var errCodeMsg = returnDataTemp.errCodeMsg;
+        var errMsg = returnDataTemp.errMsg;
+        if(returnData.message){
+            layer.msg(returnData.message, {icon: 5});
+        }else{
+            layer.msg(errCodeMsg ? errCodeMsg : errMsg ? errMsg : '操作失败', {icon: 5});
         }
     },
     // 取消关闭弹窗
@@ -101,8 +117,8 @@ var commonFuns = {
             content: contextPath + '/sys/dept/deptTreePage',
             end: function () {
                 if (selectedNode && JSON.stringify(selectedNode) != '{}') {
-                    $("#pId").val(selectedNode.id);
-                    $("#pName").val(selectedNode.name);
+                    $("#parentId").val(selectedNode.id);
+                    $("#parentName").val(selectedNode.name);
                 }
             }
         });
@@ -116,11 +132,14 @@ layui.use(['form'], function () {
     var form = layui.form;
     // 自定义表单规则，要放在form.on外面，千万不能放在提交步骤中，否则会不触发
     form.verify({
-        // 数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
-        int: [
-            /^[1-9]\d*$/
-            , '请填入大于0的整数'
-        ]
+        // 数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]，或者直接自定义
+        positiveInteger: function(value) {
+            if(value != ""){
+                if(!/^[1-9]\d*$/.test(value)){
+                    return "只能填写大于0的整数";
+                }
+            }
+        }
     });
 });
 

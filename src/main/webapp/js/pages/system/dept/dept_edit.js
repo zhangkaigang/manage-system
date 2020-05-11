@@ -7,23 +7,20 @@ layui.use(['layer', 'form'], function () {
     // 获取部门信息，回显
     var deptId = parent.param.deptId;
     var returnDataTemp = commonFuns.$Ajax(contextPath + '/sys/dept/findByDeptId/' + deptId);
-    var returnData = returnDataTemp.data;
+    var returnData = returnDataTemp.returnData;
     if(returnData.success) {
         var data = returnData.data;
         $("#deptForm input").each(function(index, element) {
             $("#"+element.id).val(data[element.name]);
         });
     } else {
-        if(data.message){
-            layer.msg(data.message, {icon: 5});
-        }else{
-            layer.msg(data.errMsg ? data.errMsg : '查询部门信息失败', {icon: 5});
-        }
+        returnDataTemp.errMsg = "查询部门信息失败";
+        commonFuns.errorInfo(returnDataTemp);
         return false;
     }
 
     // 点击上级部门时
-    $('#pName').click(function () {
+    $('#parentName').click(function () {
         commonFuns.openDeptTree();
     });
 
@@ -44,8 +41,8 @@ layui.use(['layer', 'form'], function () {
                     layer.msg('上级部门不能为自己', {icon: 5});
                     return false;
                 }
-                var returnData = commonFuns.$Ajax( contextPath + "/sys/dept/edit", formVal);
-                commonFuns.dealChildResult(returnData);
+                var returnDataTemp = commonFuns.$Ajax( contextPath + "/sys/dept/edit", formVal);
+                commonFuns.dealChildResult(returnDataTemp);
                 return false;
             });
         },
