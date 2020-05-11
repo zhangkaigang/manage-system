@@ -33,4 +33,5 @@ layui.use(['layer', 'form'], function () {
         }
     };
 
+    commonFuns.renderForm();
 });

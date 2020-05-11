@@ -12,12 +12,13 @@ var cols = [[
     {field: 'status', align: "center", sort: true, title: '状态', templet: '#statusTpl'},
     {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 150}
 ]];
-var tableIns;
+var tableIns, page;
 var tableId = 'positionTable';
 var layer, table;
-layui.use(['layer', 'table'], function () {
+layui.use(['layer', 'table', 'form'], function () {
     layer = layui.layer;
     table = layui.table;
+    form = layui.form;
 
     // 渲染表格
     tableIns = table.render({
@@ -33,7 +34,7 @@ layui.use(['layer', 'table'], function () {
             limits:[10, 50, 100, 200]
         },
         done: function(res, curr, count){
-
+            page = curr;
         }
 
     });
@@ -57,6 +58,32 @@ layui.use(['layer', 'table'], function () {
 
     // 自定义函数
     var positionFuns = {
+        // 改变激活状态
+        changeStatus : function(positionId, checked){
+            var statusName = checked ? '启用' : '禁用';
+            var status = checked ? 'ENABLE' : 'DISBABLE';
+            layer.confirm('您确定要把该职位设置为' + statusName + '状态吗？', {
+                btn: ['确认','取消']
+            }, function(){
+                var url = contextPath + "/sys/position/changeStatus/" + positionId + "/" + status;
+                var returnData = commonFuns.$Ajax(url);
+                commonFuns.dealResult(returnData);
+                // 加载load方法
+                tableIns.reload({
+                    where: obj.field
+                    , page: {
+                        curr: page
+                    }
+                });
+            }, function(){
+                // 加载load方法
+                tableIns.reload({
+                    page: {
+                        curr: page
+                    }
+                });
+            });
+        },
         // 删除
         btnDelete : function(){
             var checkStatus = table.checkStatus(tableId);
@@ -106,10 +133,25 @@ layui.use(['layer', 'table'], function () {
     table.on('tool('+ tableId +')', function(obj) {
         var selectData = obj.data;
         if (obj.event === 'btnEdit') {
-
+            param = {
+                positionId : selectData.positionId
+            };
+            layer.open({
+                type: 2,
+                title : '修改职位',
+                area: ['600px', '350px'],
+                content: contextPath + '/sys/position/editPage'
+            });
         } else if(obj.event === 'btnDelete') {
             positionFuns.delete(selectData.positionId);
         }
+    });
+
+    // 监听启用禁用开关
+    form.on('switch(status)', function(obj){
+        var positionId = obj.elem.value;
+        var checked = obj.elem.checked ? true : false;
+        positionFuns.changeStatus(positionId, checked);
     });
 
 

@@ -25,4 +25,6 @@ layui.use(['layer', 'form'], function () {
             commonFuns.btnCancel();
         }
     };
+
+    commonFuns.renderForm();
 });

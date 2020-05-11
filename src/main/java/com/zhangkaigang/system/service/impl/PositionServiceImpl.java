@@ -66,7 +66,18 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void edit(PositionDTO positionDTO) {
-
+    public PositionDTO findByPositionId(Long positionId) {
+        Position position = positionDao.selectByPrimaryKey(positionId);
+        PositionDTO positionDTO = PoJoConverterUtil.objectConverter(position, PositionDTO.class);
+        return positionDTO;
     }
+
+    @Override
+    public void edit(PositionDTO positionDTO) {
+        Position position = PoJoConverterUtil.objectConverter(positionDTO, Position.class);
+        position.setModifyTime(new Date());
+        positionDao.updateByPrimaryKeySelective(position);
+    }
+
+
 }

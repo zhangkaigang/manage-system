@@ -10,6 +10,7 @@ import com.zhangkaigang.system.service.PositionService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -102,6 +103,35 @@ public class PositionController {
     @ResponseBody
     @ApiOperation(value = "编辑职位", httpMethod = "POST")
     public Result edit(PositionDTO positionDTO) {
+        positionService.edit(positionDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 根据部门id查询职位
+     * @param positionId
+     * @return
+     */
+    @RequestMapping("/findByPositionId/{positionId}")
+    @ResponseBody
+    public Result findByPositionId(@PathVariable("positionId") Long positionId) {
+        PositionDTO positionDTO = positionService.findByPositionId(positionId);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), positionDTO);
+    }
+
+    /**
+     * 改变状态
+     * @param positionId
+     * @param status
+     * @return
+     */
+    @RequestMapping("/changeStatus/{positionId}/{status}")
+    @ResponseBody
+    public Result changeStatus(@PathVariable("positionId") Long positionId,
+                               @PathVariable("status") String status
+                               ) {
+        PositionDTO positionDTO = positionService.findByPositionId(positionId);
+        positionDTO.setStatus(status);
         positionService.edit(positionDTO);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }

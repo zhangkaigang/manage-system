@@ -31,8 +31,16 @@ public interface PositionService {
     void delete(String positionIds);
 
     /**
+     * 根据ID查找职位
+     * @param positionId
+     * @return
+     */
+    PositionDTO findByPositionId(Long positionId);
+
+    /**
      * 编辑职位
      * @param positionDTO
      */
     void edit(PositionDTO positionDTO);
+
 }
