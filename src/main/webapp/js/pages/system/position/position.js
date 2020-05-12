@@ -14,11 +14,10 @@ var cols = [[
 ]];
 var tableIns, page;
 var tableId = 'positionTable';
-var layer, table;
 layui.use(['layer', 'table', 'form'], function () {
-    layer = layui.layer;
-    table = layui.table;
-    form = layui.form;
+    var layer = layui.layer;
+    var table = layui.table;
+    var form = layui.form;
 
     // 渲染表格
     tableIns = table.render({

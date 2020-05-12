@@ -1,7 +1,5 @@
-var layer, form;
-layui.use(['layer', 'form'], function () {
-    layer = layui.layer;
-    form = layui.form;
+layui.use(['form'], function () {
+    var form = layui.form;
 
     // 获取职位信息，回显
     var positionId = parent.param.positionId;

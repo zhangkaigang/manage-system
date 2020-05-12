@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/sys/position")
 public class PositionController {
+
     private static final String PRIFIX = "system/position/";
 
     @Autowired

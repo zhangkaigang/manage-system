@@ -1,5 +1,4 @@
-layui.use(['layer', 'form'], function () {
-    var layer = layui.layer;
+layui.use([ 'form'], function () {
     var form = layui.form;
 
     // 按钮点击事件

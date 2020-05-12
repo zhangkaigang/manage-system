@@ -52,6 +52,7 @@ var commonFuns = {
             commonFuns.successInfo(returnDataTemp);
             // 刷新页面
             window.location.reload();
+            // tableIns.reload();
         }else{
             commonFuns.errorInfo(returnDataTemp);
             return false;
@@ -64,6 +65,7 @@ var commonFuns = {
             commonFuns.childSuccessInfo(returnDataTemp);
             // 刷新父页面
             window.parent.location.reload();
+            // parent.tableIns.reload();
         }else{
             commonFuns.errorInfo(returnDataTemp);
             return false;
@@ -72,12 +74,7 @@ var commonFuns = {
     // 页面成功提示信息
     successInfo : function(returnDataTemp) {
         var successMsg = returnDataTemp.successMsg;
-        layer.msg(successMsg ? successMsg : '操作成功', {
-            offset: 't',
-            time: 1, //1ms后自动关闭
-            icon : 1
-        });
-
+        layer.msg(successMsg ? successMsg : '操作成功', {offset: 't', time: 1000, icon : 1});
     },
     // 子页面成功提示信息
     childSuccessInfo : function(returnDataTemp) {
@@ -85,11 +82,7 @@ var commonFuns = {
         var index = parent.layer.getFrameIndex(window.name);
         // 关闭弹出层
         parent.layer.close(index);
-        parent.layer.msg(successMsg ? successMsg : '操作成功', {
-            offset: 't',
-            time: 1, //1ms后自动关闭
-            icon : 1
-        });
+        parent.layer.msg(successMsg ? successMsg : '操作成功', {offset: 't', time: 1000, icon : 1});
     },
     // 错误信息提示信息
     errorInfo : function(returnDataTemp) {
@@ -122,6 +115,21 @@ var commonFuns = {
                 }
             }
         });
+    },
+    // 打开权限树
+    openAuthTree : function(){
+        layer.open({
+            type: 2,
+            title: '父级权限',
+            area: ['400px', '420px'],
+            content: contextPath + '/sys/auth/authTreePage',
+            end: function () {
+                if (selectedNode && JSON.stringify(selectedNode) != '{}') {
+                    $("#parentId").val(selectedNode.id);
+                    $("#parentName").val(selectedNode.name);
+                }
+            }
+        });
     }
 };
 
@@ -138,6 +146,25 @@ layui.use(['form'], function () {
                 if(!/^[1-9]\d*$/.test(value)){
                     return "只能填写大于0的整数";
                 }
+            }
+        },
+        // 单选框、复选框必填校验
+        otherReq: function(value,item){
+            var $ = layui.$;
+            var verifyName=$(item).attr('name')
+                ,verifyType=$(item).attr('type')
+                ,formElem=$(item).parents('.layui-form') // 获取当前所在的form元素，如果存在的话
+                ,verifyElem=formElem.find('input[name='+verifyName+']') // 获取需要校验的元素
+                ,isTrue= verifyElem.is(':checked') // 是否命中校验
+                ,focusElem = verifyElem.next().find('i.layui-icon'); // 焦点元素
+            if(!isTrue || !value){
+                //定位焦点
+                focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
+                //对非输入框设置焦点
+                focusElem.first().attr("tabIndex","1").css("outline","0").blur(function() {
+                    focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
+                }).focus();
+                return '必填项不能为空';
             }
         }
     });

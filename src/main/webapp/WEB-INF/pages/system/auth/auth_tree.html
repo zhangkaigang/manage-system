@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<link rel="stylesheet" th:href="@{/js/ztree/css/zTreeStyle/zTreeStyle.css}">
+
+<body style="background-color: #fff">
+<div>
+    <div class="layui-row">
+        <ul id="authTree" class="ztree" style="height: 300px;overflow-y: auto;"></ul>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn layui-btn-sm" id="btnSure">确定</button>
+        <button class="layui-btn layui-btn-sm layui-btn-primary" id="btnCancel" type="button">取消</button>
+    </div>
+</div>
+
+<script th:src="@{/js/ztree/jquery.ztree.all.js}"></script>
+<script th:src="@{/js/pages/system/auth/auth_tree.js}"></script>
+</body>
+</html>

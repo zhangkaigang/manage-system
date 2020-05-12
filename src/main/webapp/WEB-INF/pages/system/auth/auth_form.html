@@ -1,0 +1,73 @@
+<formContent th:fragment="form">
+    <form id="authForm" class="layui-form" action="">
+        <input type="hidden" name="authId" id="authId" value=""/>
+        <div>
+            <div class="layui-card-header">
+                基本信息
+            </div>
+            <div class="layui-card-body">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限名称<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" id="name" name="name" lay-verify="required" autocomplete="off" placeholder="请输入权限名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限编码<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" id="authCode" name="authCode" lay-verify="required" autocomplete="off" placeholder="请输入权限编码" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">父级权限<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input id="parentId" name="parentId" type="hidden">
+                        <input readonly type="text" id="parentName" name="parentName" lay-verify="required" autocomplete="off" placeholder="请选择父级权限" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限类型<span class="mustStar">*</span></label>
+                    <div class="layui-input-block">
+                        <input type="radio" lay-verify="otherReq" lay-filter="authType" name="authType" id="authType1" value="1" title="菜单"/>
+                        <input type="radio" lay-verify="otherReq" lay-filter="authType" name="authType" id="authType2" value="2" title="功能"/>                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限路径</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="url" name="url" autocomplete="off" placeholder="请输入权限路径" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限层级</label>
+                    <div class="layui-input-block">
+                        <input readonly type="text" id="levels" name="levels" autocomplete="off"  class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限图标</label>
+                    <div class="layui-input-block">
+                        <input readonly type="text" id="icon" name="icon" autocomplete="off"  class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限描述</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="description" name="description" autocomplete="off"  class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">权限排序</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="sort" name="sort" lay-verify="positiveInteger" autocomplete="off" placeholder="请输入部门排序" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-bottom text-center">
+            <button class="layui-btn" lay-filter="btnSave" data-type="btnSave" lay-submit>&emsp;保存&emsp;</button>
+            <div class="layui-btn layui-btn-primary" data-type="btnCancel">&emsp;取消&emsp;</div>
+        </div>
+
+    </form>
+</formContent>

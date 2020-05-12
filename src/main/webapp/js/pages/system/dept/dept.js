@@ -1,21 +1,22 @@
-var cols = [[
-    {type: 'checkbox'},
-    {field: 'deptId', hide: true, sort: true, title: 'id'},
-    {field: 'simpleName', align: "center", sort: true, title: '部门简称'},
-    {field: 'fullName', align: "center", sort: true, title: '部门全称'},
-    {field: 'sort', align: "center", sort: true, title: '排序'},
-    {field: 'description', align: "center", sort: true, title: '备注'},
-    {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 150}
-]];
-var tableIns;
-var treeId = 'deptTree', tableId = 'deptTable';
-var condition = {
-    deptId : ''
-};
-var tree, table;
 layui.use(['tree', 'table'], function () {
-    tree = layui.tree;
-    table = layui.table;
+    var tree = layui.tree;
+    var table = layui.table;
+
+    var cols = [[
+        {type: 'checkbox'},
+        {field: 'deptId', hide: true, sort: true, title: 'id'},
+        {field: 'simpleName', align: "center", sort: true, title: '部门简称'},
+        {field: 'fullName', align: "center", sort: true, title: '部门全称'},
+        {field: 'sort', align: "center", sort: true, title: '排序'},
+        {field: 'description', align: "center", sort: true, title: '备注'},
+        {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 150}
+    ]];
+    var tableIns;
+    var treeId = 'deptTree', tableId = 'deptTable';
+    var condition = {
+        deptId : ''
+    };
+
     var returnDataTemp = commonFuns.$Ajax(contextPath + '/sys/dept/getDeptLayuiTree');
     var returnData = returnDataTemp.returnData;
     if (returnData) {

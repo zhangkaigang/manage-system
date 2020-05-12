@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<div class="content-div">
+    <!-- 内容头部 start -->
+    <div class="content-head-div">
+        <div class="content-head-search-form-div">
+            <!-- 查询表单 start -->
+            <form id="deptSearchForm" class="layui-form layui-form-pane" method="post" action="">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input placeholder="权限名称/权限编码" name="condition" autocomplete="off" class="layui-input" type="text"/>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input placeholder="层级" name="levels" autocomplete="off" class="layui-input" type="text"/>
+                    </div>
+                    <button class="layui-btn"  lay-submit="" data-type="btn-search" lay-filter="btn-search">
+                        <i class="layui-icon">&#xe615;</i>查询
+                    </button>
+                </div>
+            </form>
+            <!-- 查询表单 end -->
+        </div>
+        <!-- 工具栏按钮 start -->
+        <div class="content-head-btn-div">
+            <button class="layui-btn" data-type="btnAdd">
+                <i class="layui-icon">&#xe654;</i>添加
+            </button>
+            <button class="layui-btn" data-type="btnDelete">
+                <i class="layui-icon">&#xe640;</i>删除
+            </button>
+        </div>
+        <!-- 工具栏按钮 end -->
+    </div>
+    <!-- 内容头部 end -->
+
+    <!-- 主体内容 start -->
+    <div class="content-body-div">
+        <div>
+            <!-- 表格 start -->
+            <table id="authTable" lay-filter="authTable"></table>
+            <!-- 表格 end -->
+        </div>
+    </div>
+    <!-- 主体内容 end -->
+
+</div>
+
+
+
+<script th:src="@{/js/pages/system/auth/auth.js}"></script>

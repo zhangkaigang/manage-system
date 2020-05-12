@@ -1,9 +1,7 @@
 var selectedNode = {};
-var layer, form;
 layui.use(['layer', 'form'], function () {
-    layer = layui.layer;
-    form = layui.form;
-
+    var layer = layui.layer;
+    var form = layui.form;
     // 获取部门信息，回显
     var deptId = parent.param.deptId;
     var returnDataTemp = commonFuns.$Ajax(contextPath + '/sys/dept/findByDeptId/' + deptId);
@@ -38,7 +36,7 @@ layui.use(['layer', 'form'], function () {
             form.on('submit(btnSave)', function(data){
                 var formVal = data.field;
                 if(formVal.deptId == formVal.pId) {
-                    layer.msg('上级部门不能为自己', {icon: 5});
+                    layer.msg('上级部门不能为自身', {icon: 5});
                     return false;
                 }
                 var returnDataTemp = commonFuns.$Ajax( contextPath + "/sys/dept/edit", formVal);

@@ -79,7 +79,12 @@ body {
 }
 .content-head-search-div{
     float: right;
-    /*margin-right: 25px;*/
+}
+.content-head-search-form-div{
+
+}
+.content-head-search-form-div button{
+    border-radius: 5px;
 }
 .search-file-input{
     background-color: #f1f2f4;
@@ -92,6 +97,12 @@ body {
 }
 .content-head-btn-div{
 
+}
+.content-body-form-div{
+    position: absolute;
+    height: 85%;
+    width: 100%;
+    overflow-y: auto;
 }
 .table-no-border-div .layui-table-view{
     border: 0;
