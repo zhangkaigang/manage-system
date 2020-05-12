@@ -58,6 +58,11 @@ public class AuthDTO {
      */
     private Integer sort;
 
+    /**
+     * 冗余字段-父级权限名称
+     */
+    private String parentName;
+
     public Long getAuthId() {
         return authId;
     }
@@ -136,5 +141,14 @@ public class AuthDTO {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

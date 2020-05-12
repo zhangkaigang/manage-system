@@ -1,5 +1,6 @@
 package com.zhangkaigang.system.controller;
 
+import com.zhangkaigang.base.constant.CacheFactory;
 import com.zhangkaigang.base.enums.StatusCodeEnum;
 import com.zhangkaigang.base.pojo.common.Result;
 import com.zhangkaigang.base.pojo.node.ZTreeFactory;
@@ -10,7 +11,9 @@ import com.zhangkaigang.system.service.AuthService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -29,6 +32,9 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private CacheFactory cacheFactory;
 
     /**
      * 权限管理页面
@@ -92,6 +98,53 @@ public class AuthController {
     @ResponseBody
     public Result add(AuthDTO authDTO) {
         authService.add(authDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 编辑页面
+     * @return
+     */
+    @RequestMapping("/editPage")
+    public String editPage() {
+        return PRIFIX + "auth_edit";
+    }
+
+    /**
+     * 根据权限id查询权限
+     * @param authId
+     * @return
+     */
+    @RequestMapping("/findByAuthId/{authId}")
+    @ResponseBody
+    public Result findByAuthId(@PathVariable("authId") Long authId) {
+        AuthDTO authDTO = authService.findByAuthId(authId);
+        authDTO.setParentName(cacheFactory.getAuthName(authDTO.getParentId()));
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), authDTO);
+    }
+
+    /**
+     * 编辑
+     * @param authDTO
+     * @return
+     */
+    @RequestMapping("/edit")
+    @ResponseBody
+    @ApiOperation(value = "编辑权限", httpMethod = "POST")
+    public Result edit(AuthDTO authDTO) {
+        authService.edit(authDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 删除权限
+     * @param authId
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestParam("authId") Long authId) {
+        authService.delete(authId);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 }

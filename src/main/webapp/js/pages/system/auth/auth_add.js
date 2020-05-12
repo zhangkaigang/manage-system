@@ -7,7 +7,6 @@ layui.use(['form'], function () {
         commonFuns.openAuthTree();
     });
 
-
     // 按钮点击事件
     $('.layui-btn').on('click', function () {
         var type = $(this).data('type');
@@ -34,3 +33,9 @@ layui.use(['form'], function () {
 
     commonFuns.renderForm();
 });
+
+// 填充层级
+function fillLevels(){
+
+
+}

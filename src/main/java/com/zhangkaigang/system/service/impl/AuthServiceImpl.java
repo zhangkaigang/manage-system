@@ -7,8 +7,10 @@ import com.zhangkaigang.system.dao.AuthDao;
 import com.zhangkaigang.system.pojo.dto.AuthDTO;
 import com.zhangkaigang.system.pojo.po.Auth;
 import com.zhangkaigang.system.service.AuthService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +32,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public List<AuthDTO> listTree() {
-        List<Auth> authList = authDao.selectAll();
+        Example example = new Example(Auth.class);
+        example.orderBy("sort").asc();
+        List<Auth> authList = authDao.selectByExample(example);
         List<AuthDTO> authDTOList = PoJoConverterUtil.objectListConverter(authList, AuthDTO.class);
         return authDTOList;
     }
@@ -46,5 +50,43 @@ public class AuthServiceImpl implements AuthService {
         auth.setCreateTime(new Date());
         auth.setAuthId(idWorker.nextId());
         authDao.insertSelective(auth);
+    }
+
+    @Override
+    public void edit(AuthDTO authDTO) {
+        Auth auth = PoJoConverterUtil.objectConverter(authDTO, Auth.class);
+        auth.setModifyTime(new Date());
+        authDao.updateByPrimaryKeySelective(auth);
+    }
+
+    @Override
+    public AuthDTO findByAuthId(Long authId) {
+        Auth auth = authDao.selectByPrimaryKey(authId);
+        AuthDTO authDTO = PoJoConverterUtil.objectConverter(auth, AuthDTO.class);
+        return authDTO;
+    }
+
+    @Override
+    public void delete(Long authId) {
+        List<Auth> authList = selectByParentId(authId);
+        if(CollectionUtils.isNotEmpty(authList)) {
+            for (Auth auth : authList) {
+                delete(auth.getAuthId());
+            }
+        }
+        authDao.deleteByPrimaryKey(authId);
+    }
+
+    /**
+     * 根据父级ID查询权限列表
+     * @param parentId
+     * @return
+     */
+    public List<Auth> selectByParentId(Long parentId) {
+        Example example = new Example(Auth.class);
+        Example.Criteria criteria = example.createCriteria();
+        // 添加条件
+        criteria.andEqualTo("parentId", parentId);
+        return authDao.selectByExample(example);
     }
 }

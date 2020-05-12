@@ -17,4 +17,9 @@ public class CacheConstants {
      * 部门名称缓存标识前缀集合
      */
     public static final String DEPT_NAME = "dept_name_";
+
+    /**
+     * 权限名称缓存标识前缀集合
+     */
+    public static final String AUTH_NAME = "auth_name_";
 }

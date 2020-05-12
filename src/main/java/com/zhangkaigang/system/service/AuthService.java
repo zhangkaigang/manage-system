@@ -26,4 +26,23 @@ public interface AuthService {
      * @param authDTO
      */
     void add(AuthDTO authDTO);
+
+    /**
+     * 编辑部门
+     * @param authDTO
+     */
+    void edit(AuthDTO authDTO);
+
+    /**
+     * 根据主键查询权限
+     * @param authId
+     * @return
+     */
+    AuthDTO findByAuthId(Long authId);
+
+    /**
+     * 删除权限，删除本身和子权限
+     * @param authId
+     */
+    void delete(Long authId);
 }

@@ -127,6 +127,24 @@ var commonFuns = {
                 if (selectedNode && JSON.stringify(selectedNode) != '{}') {
                     $("#parentId").val(selectedNode.id);
                     $("#parentName").val(selectedNode.name);
+                    if ($("#levels").length > 0) {
+                        // 判断如果有层级元素，则回显
+                        var parentId = selectedNode.id;
+                        if(parentId == 0) {
+                            $('#levels').val(1);
+                        } else {
+                            var returnDataTemp = commonFuns.$Ajax(contextPath + "/sys/auth/findByAuthId/" + selectedNode.id);
+                            var returnData = returnDataTemp.returnData;
+                            if(returnData.success) {
+                                var data = returnData.data;
+                                $('#levels').val(data.levels + 1);
+                            } else {
+                                returnDataTemp.errMsg = "查询权限信息失败";
+                                commonFuns.errorInfo(returnDataTemp);
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
         });

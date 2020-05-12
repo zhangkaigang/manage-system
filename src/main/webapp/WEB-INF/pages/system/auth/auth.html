@@ -27,9 +27,6 @@
             <button class="layui-btn" data-type="btnAdd">
                 <i class="layui-icon">&#xe654;</i>添加
             </button>
-            <button class="layui-btn" data-type="btnDelete">
-                <i class="layui-icon">&#xe640;</i>删除
-            </button>
         </div>
         <!-- 工具栏按钮 end -->
     </div>
@@ -47,6 +44,9 @@
 
 </div>
 
-
-
+<script type="text/html" id="btnBar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="btnAddChild">添加子权限</a>
+    <a class="layui-btn layui-btn-xs" lay-event="btnEdit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="btnDelete">删除</a>
+</script>
 <script th:src="@{/js/pages/system/auth/auth.js}"></script>
