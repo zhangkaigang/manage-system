@@ -62,9 +62,9 @@ var commonFuns = {
     dealChildResult : function(returnDataTemp){
         var returnData = returnDataTemp.returnData;
         if(returnData.success){
-            commonFuns.childSuccessInfo(returnDataTemp);
             // 刷新父页面
             window.parent.location.reload();
+            commonFuns.childSuccessInfo(returnDataTemp);
             // parent.tableIns.reload();
         }else{
             commonFuns.errorInfo(returnDataTemp);
@@ -125,29 +125,37 @@ var commonFuns = {
             content: contextPath + '/sys/auth/authTreePage',
             end: function () {
                 if (selectedNode && JSON.stringify(selectedNode) != '{}') {
-                    $("#parentId").val(selectedNode.id);
-                    $("#parentName").val(selectedNode.name);
-                    if ($("#levels").length > 0) {
-                        // 判断如果有层级元素，则回显
-                        var parentId = selectedNode.id;
-                        if(parentId == 0) {
-                            $('#levels').val(1);
-                        } else {
-                            var returnDataTemp = commonFuns.$Ajax(contextPath + "/sys/auth/findByAuthId/" + selectedNode.id);
-                            var returnData = returnDataTemp.returnData;
-                            if(returnData.success) {
-                                var data = returnData.data;
-                                $('#levels').val(data.levels + 1);
-                            } else {
-                                returnDataTemp.errMsg = "查询权限信息失败";
-                                commonFuns.errorInfo(returnDataTemp);
-                                return false;
-                            }
-                        }
-                    }
+                    var parentId = selectedNode.id;
+                    commonFuns.fillAuthInfo(parentId);
+
                 }
             }
         });
+    },
+    // 填充权限的相关信息
+    fillAuthInfo : function(parentId) {
+        $("#parentId").val(parentId);
+        if(parentId == 0) {
+            $("#parentName").val('顶级');
+            if ($("#levels").length > 0) {
+                // 存在层级元素
+                $('#levels').val(1);
+            }
+        } else {
+            var returnDataTemp = commonFuns.$Ajax(contextPath + "/sys/auth/findByAuthId/" + parentId);
+            var returnData = returnDataTemp.returnData;
+            if(returnData.success) {
+                var data = returnData.data;
+                $("#parentName").val(data.name);
+                if ($("#levels").length > 0) {
+                    $('#levels').val(data.levels + 1);
+                }
+            } else {
+                returnDataTemp.errMsg = "查询权限信息失败";
+                commonFuns.errorInfo(returnDataTemp);
+                return false;
+            }
+        }
     }
 };
 

@@ -19,7 +19,6 @@ var cols = [[
 
 var tableIns;
 var tableId = 'authTable';
-
 layui.config({
     base: contextPath + '/js/layui/extend/treetable/'
 }).extend({
@@ -62,6 +61,9 @@ layui.config({
     var authFuns = {
         // 添加
         btnAdd : function() {
+            param = {
+                parentId : ''
+            };
             layer.open({
                 type: 2,
                 title : '添加权限',
@@ -75,7 +77,15 @@ layui.config({
     treeTable.on('tool('+ tableId +')', function(obj) {
         var selectData = obj.data;
         if(obj.event === 'btnAddChild') {
-
+            param = {
+                parentId : selectData.authId
+            };
+            layer.open({
+                type: 2,
+                title : '添加子权限',
+                area: ['800px', '500px'],
+                content: contextPath + '/sys/auth/addPage'
+            });
         } else if (obj.event === 'btnEdit'){
             param = {
                 authId : selectData.authId

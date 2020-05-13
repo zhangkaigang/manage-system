@@ -1,6 +1,7 @@
 <formContent th:fragment="form">
     <form id="authForm" class="layui-form" action="">
         <input type="hidden" name="authId" id="authId" value=""/>
+        <input type="hidden" name="levels" id="levels" value=""/>
         <div>
             <div class="layui-card-header">
                 基本信息
@@ -38,12 +39,12 @@
                         <input type="text" id="url" name="url" autocomplete="off" placeholder="请输入权限路径" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <!--<div class="layui-form-item">
                     <label class="layui-form-label">权限层级</label>
                     <div class="layui-input-block">
-                        <input readonly type="text" id="levels" name="levels" autocomplete="off"  class="layui-input">
+                        <input placeholder="根据父级权限自动生成" type="text" id="levels" name="levels" autocomplete="off"  class="layui-input layui-disabled">
                     </div>
-                </div>
+                </div>-->
                 <div class="layui-form-item">
                     <label class="layui-form-label">权限图标</label>
                     <div class="layui-input-block">

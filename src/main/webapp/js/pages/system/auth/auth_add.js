@@ -1,11 +1,16 @@
 var selectedNode = {};
 layui.use(['form'], function () {
     var form = layui.form;
-
-    // 点击父级权限时
-    $('#parentName').click(function () {
-        commonFuns.openAuthTree();
-    });
+    if(parent.param && parent.param.parentId) {
+        // 此时是添加子权限，回显父级权限，且父级权限不可改
+        commonFuns.fillAuthInfo(parent.param.parentId);
+        $('#parentName').addClass("layui-disabled");
+    } else {
+        // 点击父级权限时
+        $('#parentName').click(function () {
+            commonFuns.openAuthTree();
+        });
+    }
 
     // 按钮点击事件
     $('.layui-btn').on('click', function () {
