@@ -51,6 +51,11 @@ layui.config({
         cols: cols
     });
 
+    // 搜索
+    $('#btnSearch').on('click', function () {
+        authFuns.search();
+    });
+
     // 按钮点击事件
     $('.layui-btn').on('click', function(){
         var type = $(this).data('type');
@@ -59,6 +64,15 @@ layui.config({
 
     // 自定义函数
     var authFuns = {
+        // 搜索
+        search : function() {
+            tableIns.reload({
+                where : {
+                    condition : $('#condition').val().trim(),
+                    levels : $('#levels').val().trim()
+                }
+            });
+        },
         // 添加
         btnAdd : function() {
             param = {

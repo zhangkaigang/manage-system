@@ -51,8 +51,9 @@ public class AuthController {
      */
     @RequestMapping("/listTree")
     @ResponseBody
-    public LayuiPageInfo listTree() {
-        List<AuthDTO> authDTOList = authService.listTree();
+    public LayuiPageInfo listTree(@RequestParam(value = "condition", required = false) String condition,
+                                  @RequestParam(value = "levels", required = false) String levels) {
+        List<AuthDTO> authDTOList = authService.listTree(condition, levels);
         LayuiPageInfo layuiPageInfo = new LayuiPageInfo();
         layuiPageInfo.setData(authDTOList);
         return layuiPageInfo;

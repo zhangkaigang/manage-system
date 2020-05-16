@@ -8,6 +8,7 @@ import com.zhangkaigang.system.pojo.dto.AuthDTO;
 import com.zhangkaigang.system.pojo.po.Auth;
 import com.zhangkaigang.system.service.AuthService;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -31,8 +32,17 @@ public class AuthServiceImpl implements AuthService {
     private IdWorker idWorker;
 
     @Override
-    public List<AuthDTO> listTree() {
+    public List<AuthDTO> listTree(String condition, String levels) {
         Example example = new Example(Auth.class);
+        if(StringUtils.isNotEmpty(condition)) {
+            Example.Criteria criteria = example.createCriteria();
+            criteria.orLike("name", "%" + condition + "%").orLike("authCode", "%" + condition + "%");
+        }
+        if(StringUtils.isNotEmpty(levels)) {
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("levels", levels);
+            example.and(criteria);
+        }
         example.orderBy("sort").asc();
         List<Auth> authList = authDao.selectByExample(example);
         List<AuthDTO> authDTOList = PoJoConverterUtil.objectListConverter(authList, AuthDTO.class);

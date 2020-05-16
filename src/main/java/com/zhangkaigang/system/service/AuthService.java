@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface AuthService {
 
-    List<AuthDTO> listTree();
+    List<AuthDTO> listTree(String condition, String levels);
 
     /**
      * 获取ztree风格的权限树

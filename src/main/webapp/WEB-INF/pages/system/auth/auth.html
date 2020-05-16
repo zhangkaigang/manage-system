@@ -7,17 +7,17 @@
     <div class="content-head-div">
         <div class="content-head-search-form-div">
             <!-- 查询表单 start -->
-            <form id="deptSearchForm" class="layui-form layui-form-pane" method="post" action="">
+            <form id="searchForm" class="layui-form layui-form-pane" method="post" action="">
                 <div class="layui-form-item">
                     <div class="layui-input-inline">
-                        <input placeholder="权限名称/权限编码" name="condition" autocomplete="off" class="layui-input" type="text"/>
+                        <input placeholder="权限名称/权限编码" id="condition" autocomplete="off" class="layui-input" type="text"/>
                     </div>
                     <div class="layui-input-inline">
-                        <input placeholder="层级" name="levels" autocomplete="off" class="layui-input" type="text"/>
+                        <input placeholder="层级" id="levels" autocomplete="off" class="layui-input" type="text"/>
                     </div>
-                    <button class="layui-btn"  lay-submit="" data-type="btn-search" lay-filter="btn-search">
+                    <div class="layui-btn"  id="btnSearch">
                         <i class="layui-icon">&#xe615;</i>查询
-                    </button>
+                    </div>
                 </div>
             </form>
             <!-- 查询表单 end -->
