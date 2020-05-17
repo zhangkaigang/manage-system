@@ -14,8 +14,8 @@ public class PublicPo {
     /**
      * 创建人
      */
-    @Column(name = "create_op")
-    private Long createOp;
+    @Column(name = "create_user")
+    private Long createUser;
 
     /**
      * 创建时间
@@ -26,8 +26,8 @@ public class PublicPo {
     /**
      * 修改人
      */
-    @Column(name = "modify_op")
-    private Long modifyOp;
+    @Column(name = "modify_user")
+    private Long modifyUser;
 
     /**
      * 修改时间
@@ -35,12 +35,12 @@ public class PublicPo {
     @Column(name = "modify_time")
     private Date modifyTime;
 
-    public Long getCreateOp() {
-        return createOp;
+    public Long getCreateUser() {
+        return createUser;
     }
 
-    public void setCreateOp(Long createOp) {
-        this.createOp = createOp;
+    public void setCreateUser(Long createUser) {
+        this.createUser = createUser;
     }
 
     public Date getCreateTime() {
@@ -51,12 +51,12 @@ public class PublicPo {
         this.createTime = createTime;
     }
 
-    public Long getModifyOp() {
-        return modifyOp;
+    public Long getModifyUser() {
+        return modifyUser;
     }
 
-    public void setModifyOp(Long modifyOp) {
-        this.modifyOp = modifyOp;
+    public void setModifyUser(Long modifyUser) {
+        this.modifyUser = modifyUser;
     }
 
     public Date getModifyTime() {

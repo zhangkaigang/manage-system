@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<div class="content-div">
+    <!-- 内容头部 start -->
+    <div class="content-head-div">
+        <div class="content-head-search-div">
+            <div class="layui-input-inline">
+                <input type="text" id="searchName" class="layui-input layui-input-radius search-file-input"
+                       placeholder="角色名称/编码" onfocus="this.placeholder=''" onblur="this.placeholder='角色名称/编码'"/>
+                <span class="iconfont icon-search-file" id="btnSearch">&#xe627;</span>
+            </div>
+        </div>
+        <!-- 工具栏按钮 start -->
+        <div class="content-head-btn-div">
+            <button class="layui-btn" data-type="btnAdd">
+                <i class="layui-icon">&#xe654;</i>添加
+            </button>
+            <button class="layui-btn" data-type="btnDelete">
+                <i class="layui-icon">&#xe640;</i>删除
+            </button>
+        </div>
+        <!-- 工具栏按钮 end -->
+    </div>
+    <!-- 内容头部 end -->
+
+    <!-- 主体内容 start -->
+    <div class="content-body-div">
+        <div>
+            <!-- 表格 start -->
+            <table id="roleTable" lay-filter="roleTable"></table>
+            <!-- 表格 end -->
+        </div>
+    </div>
+    <!-- 主体内容 end -->
+
+</div>
+
+<script type="text/html" id="btnBar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="btnEdit">权限配置</a>
+    <a class="layui-btn layui-btn-xs" lay-event="btnEdit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="btnDelete">删除</a>
+</script>
+
+<script th:src="@{/js/pages/system/role/role.js}"></script>

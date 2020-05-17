@@ -8,15 +8,15 @@
         <result column="full_name"  property="fullName"/>
         <result column="description"  property="description"/>
         <result column="sort"  property="sort"/>
-        <result column="create_op"  property="createOp"/>
+        <result column="create_user"  property="createUser"/>
         <result column="create_time"  property="createTime"/>
-        <result column="modify_op"  property="modifyOp"/>
+        <result column="modify_user"  property="modifyUser"/>
         <result column="modify_time"  property="modifyTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        dept_id , parent_id, simple_name, full_name,  description, sort,  create_op, create_time, modify_op, modify_time
+        dept_id , parent_id, simple_name, full_name,  description, sort,  create_user, create_time, modify_user, modify_time
     </sql>
 
     <select id="list" resultMap="BaseResultMap">

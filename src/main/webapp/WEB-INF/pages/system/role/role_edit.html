@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+
+<body class="content-page-body">
+<!-- 表单部分 -->
+<div th:include="system/role/role_form :: form"></div>
+
+<script th:src="@{/js/pages/system/role/role_edit.js}"></script>
+</body>
+</html>
