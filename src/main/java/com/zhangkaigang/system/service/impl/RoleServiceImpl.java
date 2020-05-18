@@ -97,4 +97,12 @@ public class RoleServiceImpl implements RoleService {
         RoleDTO roleDTO = PoJoConverterUtil.objectConverter(role, RoleDTO.class);
         return roleDTO;
     }
+
+    @Override
+    public List<RoleAuth> findAuthByRoleId(Long roleId) {
+        Example example = new Example(RoleAuth.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("roleId", roleId);
+        return roleAuthDao.selectByExample(example);
+    }
 }

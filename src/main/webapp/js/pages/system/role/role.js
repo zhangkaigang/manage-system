@@ -113,6 +113,16 @@ layui.use(['layer', 'table'], function () {
             });
         } else if(obj.event === 'btnDelete') {
             roleFuns.delete(selectData.roleId);
+        } else if(obj.event === 'btnAuthConfig') {
+            param = {
+                roleId : selectData.roleId
+            };
+            layer.open({
+                type: 2,
+                title : '权限配置',
+                area: ['600px', '400px'],
+                content: contextPath + '/sys/role/roleAuth'
+            });
         }
     });
 });

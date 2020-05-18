@@ -5,15 +5,22 @@ import com.zhangkaigang.base.enums.StatusCodeEnum;
 import com.zhangkaigang.base.pojo.common.Result;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
 import com.zhangkaigang.base.pojo.page.LayuiPageInfo;
+import com.zhangkaigang.system.pojo.dto.AuthDTO;
 import com.zhangkaigang.system.pojo.dto.RoleDTO;
+import com.zhangkaigang.system.pojo.po.RoleAuth;
+import com.zhangkaigang.system.service.AuthService;
 import com.zhangkaigang.system.service.RoleService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @Description:TODO
@@ -29,6 +36,9 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private AuthService authService;
 
     /**
      * 角色管理页面
@@ -123,6 +133,37 @@ public class RoleController {
     public Result findByRoleId(@PathVariable("roleId") Long roleId) {
         RoleDTO roleDTO = roleService.findByRoleId(roleId);
         return new Result(true, StatusCodeEnum.OK.getStatusCode(), roleDTO);
+    }
+
+    /**
+     * 权限配置页面
+     * @return
+     */
+    @RequestMapping("/roleAuth")
+    public String roleAuth(){
+        return PRIFIX + "role_auth";
+    }
+
+    @RequestMapping("/findAuthByRoleId/{roleId}")
+    @ResponseBody
+    public Result findAuthByRoleId(@PathVariable("roleId") Long roleId){
+        // 角色下的权限
+        List<RoleAuth> authList = roleService.findAuthByRoleId(roleId);
+        // 全部权限
+        List<AuthDTO> allAuthList = authService.listTree(null, null);
+
+        if(CollectionUtils.isNotEmpty(authList)) {
+            for (RoleAuth roleAuth : authList) {
+                // 设置角色下的权限checked状态为：true
+                for (AuthDTO authDTO : allAuthList) {
+                    if(Objects.equals(roleAuth.getRoleId(), authDTO.getAuthId())){
+                        authDTO.setChecked(true);
+                    }
+                }
+            }
+        }
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), allAuthList);
+
     }
 
 }

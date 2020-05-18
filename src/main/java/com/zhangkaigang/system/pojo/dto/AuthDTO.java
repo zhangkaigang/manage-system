@@ -63,6 +63,11 @@ public class AuthDTO {
      */
     private String parentName;
 
+    /**
+     * 冗余字段-选中
+     */
+    private Boolean checked;
+
     public Long getAuthId() {
         return authId;
     }
@@ -150,5 +155,13 @@ public class AuthDTO {
 
     public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
 }

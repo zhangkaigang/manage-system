@@ -2,6 +2,9 @@ package com.zhangkaigang.system.service;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.system.pojo.dto.RoleDTO;
+import com.zhangkaigang.system.pojo.po.RoleAuth;
+
+import java.util.List;
 
 /**
  * @Description:TODO
@@ -49,4 +52,10 @@ public interface RoleService {
      * @return
      */
     RoleDTO findByRoleId(Long roleId);
+
+    /**
+     * 查询角色拥有的权限列表
+     * @return
+     */
+    List<RoleAuth> findAuthByRoleId(Long roleId);
 }
