@@ -99,4 +99,5 @@ public class AuthServiceImpl implements AuthService {
         criteria.andEqualTo("parentId", parentId);
         return authDao.selectByExample(example);
     }
+
 }

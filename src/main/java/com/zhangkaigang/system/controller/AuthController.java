@@ -78,7 +78,7 @@ public class AuthController {
     }
 
     /**
-     * 获取ztree风格的部门树
+     * 获取ztree风格的权限树
      * @return
      */
     @RequestMapping("getAuthZTree")
@@ -86,7 +86,7 @@ public class AuthController {
     @ApiOperation(value = "获取ztree风格的权限树", httpMethod = "GET")
     public List<ZTreeNode> getDeptZTree() {
         List<ZTreeNode> zTreeNodeList = authService.getAuthZTree();
-        zTreeNodeList.add(ZTreeFactory.createRoot());
+        zTreeNodeList.add(ZTreeFactory.createRoot(false));
         return zTreeNodeList;
     }
 

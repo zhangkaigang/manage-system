@@ -10,8 +10,8 @@ var setting = {
         },
         simpleData: {
             enable: true,
-            idKey: "authId", //修改默认的ID为自己的ID
-            pIdKey: "parentId",//修改默认父级ID为自己数据的父级ID
+            idKey: "id", //修改默认的ID为自己的ID
+            pIdKey: "pId",//修改默认父级ID为自己数据的父级ID
             rootPId: 0     //根节点的ID
         }
     }
@@ -58,7 +58,7 @@ layui.use(['form'], function() {
             }
             var returnDataTemp = commonFuns.$Ajax(contextPath+"/sys/role/saveRoleAuth",
                 {'roleId' : roleId, 'authIds' : authIds});
-            commonFuns.dealResult(returnDataTemp);
+            commonFuns.dealChildResult(returnDataTemp);
         },
         // 取消
         btnCancel: function () {

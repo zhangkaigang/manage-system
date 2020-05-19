@@ -45,4 +45,5 @@ public interface AuthService {
      * @param authId
      */
     void delete(Long authId);
+
 }

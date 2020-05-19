@@ -103,7 +103,7 @@ public class DeptController {
     @ApiOperation(value = "获取ztree风格的部门树", httpMethod = "GET")
     public List<ZTreeNode> getDeptZTree() {
         List<ZTreeNode> zTreeNodeList = deptService.getDeptZTree();
-        zTreeNodeList.add(ZTreeFactory.createRoot());
+        zTreeNodeList.add(ZTreeFactory.createRoot(false));
         return zTreeNodeList;
     }
 

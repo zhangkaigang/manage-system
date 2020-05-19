@@ -3,9 +3,10 @@ package com.zhangkaigang.system.controller;
 import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.enums.StatusCodeEnum;
 import com.zhangkaigang.base.pojo.common.Result;
+import com.zhangkaigang.base.pojo.node.ZTreeFactory;
+import com.zhangkaigang.base.pojo.node.ZTreeNode;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
 import com.zhangkaigang.base.pojo.page.LayuiPageInfo;
-import com.zhangkaigang.system.pojo.dto.AuthDTO;
 import com.zhangkaigang.system.pojo.dto.RoleDTO;
 import com.zhangkaigang.system.pojo.po.RoleAuth;
 import com.zhangkaigang.system.service.AuthService;
@@ -144,26 +145,46 @@ public class RoleController {
         return PRIFIX + "role_auth";
     }
 
+    /**
+     * 查询角色拥有的权限树
+     * @param roleId
+     * @return
+     */
     @RequestMapping("/findAuthByRoleId/{roleId}")
     @ResponseBody
     public Result findAuthByRoleId(@PathVariable("roleId") Long roleId){
         // 角色下的权限
         List<RoleAuth> authList = roleService.findAuthByRoleId(roleId);
         // 全部权限
-        List<AuthDTO> allAuthList = authService.listTree(null, null);
-
+        List<ZTreeNode> zTreeNodeList = authService.getAuthZTree();
         if(CollectionUtils.isNotEmpty(authList)) {
             for (RoleAuth roleAuth : authList) {
                 // 设置角色下的权限checked状态为：true
-                for (AuthDTO authDTO : allAuthList) {
-                    if(Objects.equals(roleAuth.getRoleId(), authDTO.getAuthId())){
-                        authDTO.setChecked(true);
+                for (ZTreeNode zTreeNode : zTreeNodeList) {
+                    if(Objects.equals(roleAuth.getAuthId(), zTreeNode.getId())){
+                        zTreeNode.setChecked(true);
                     }
                 }
             }
+            zTreeNodeList.add(ZTreeFactory.createRoot(true));
+        } else {
+            zTreeNodeList.add(ZTreeFactory.createRoot(false));
         }
-        return new Result(true, StatusCodeEnum.OK.getStatusCode(), allAuthList);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), zTreeNodeList);
+    }
 
+    /**
+     * 角色配置权限
+     * @param roleId
+     * @param authIds
+     * @return
+     */
+    @RequestMapping("/saveRoleAuth")
+    @ResponseBody
+    public Result saveRoleAuth(@RequestParam(value = "roleId") Long roleId,
+                               @RequestParam(value = "authIds") String authIds){
+        roleService.saveRoleAuth(roleId, authIds);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 
 }

@@ -58,4 +58,12 @@ public interface RoleService {
      * @return
      */
     List<RoleAuth> findAuthByRoleId(Long roleId);
+
+
+    /**
+     * 配置权限
+     * @param roleId
+     * @param authIds
+     */
+    void saveRoleAuth(Long roleId, String authIds);
 }

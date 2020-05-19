@@ -8,9 +8,9 @@ package com.zhangkaigang.base.pojo.node;
  */
 public class ZTreeFactory {
 
-    public static ZTreeNode createRoot() {
+    public static ZTreeNode createRoot(Boolean checked) {
         ZTreeNode zTreeNode = new ZTreeNode();
-        zTreeNode.setChecked(true);
+        zTreeNode.setChecked(checked);
         zTreeNode.setId(0L);
         zTreeNode.setName("顶级");
         zTreeNode.setTitle("顶级");

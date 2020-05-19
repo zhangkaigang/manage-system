@@ -105,4 +105,24 @@ public class RoleServiceImpl implements RoleService {
         criteria.andEqualTo("roleId", roleId);
         return roleAuthDao.selectByExample(example);
     }
+
+
+    @Override
+    public void saveRoleAuth(Long roleId, String authIds) {
+        String[] authIdsArray = authIds.split(",");
+        Example example = new Example(RoleAuth.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("roleId", roleId);
+        roleAuthDao.deleteByExample(example);
+        for(String authIdStr : authIdsArray){
+            Long authId = Long.parseLong(authIdStr);
+            if(authId == 0L) {
+                continue;
+            }
+            RoleAuth roleAuth = new RoleAuth();
+            roleAuth.setRoleId(roleId);
+            roleAuth.setAuthId(authId);
+            roleAuthDao.insertSelective(roleAuth);
+        }
+    }
 }
