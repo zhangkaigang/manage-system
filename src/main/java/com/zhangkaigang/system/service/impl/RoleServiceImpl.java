@@ -2,7 +2,7 @@ package com.zhangkaigang.system.service.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
-import com.zhangkaigang.base.utils.IdWorker;
+import com.zhangkaigang.base.service.BaseService;
 import com.zhangkaigang.base.utils.PoJoConverterUtil;
 import com.zhangkaigang.system.dao.RoleAuthDao;
 import com.zhangkaigang.system.dao.RoleDao;
@@ -27,13 +27,10 @@ import java.util.List;
  * @Version:1.0
  */
 @Service
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Autowired
     private RoleDao roleDao;
-
-    @Autowired
-    private IdWorker idWorker;
 
     @Autowired
     private RoleAuthDao roleAuthDao;

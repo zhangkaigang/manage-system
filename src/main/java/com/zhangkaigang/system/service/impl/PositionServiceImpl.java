@@ -2,7 +2,7 @@ package com.zhangkaigang.system.service.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
-import com.zhangkaigang.base.utils.IdWorker;
+import com.zhangkaigang.base.service.BaseService;
 import com.zhangkaigang.base.utils.PoJoConverterUtil;
 import com.zhangkaigang.system.dao.PositionDao;
 import com.zhangkaigang.system.pojo.dto.PositionDTO;
@@ -25,13 +25,10 @@ import java.util.List;
  * @Version:1.0
  */
 @Service
-public class PositionServiceImpl implements PositionService {
+public class PositionServiceImpl extends BaseService implements PositionService {
 
     @Autowired
     private PositionDao positionDao;
-
-    @Autowired
-    private IdWorker idWorker;
 
     @Override
     public PageInfo<PositionDTO> list(String name) {

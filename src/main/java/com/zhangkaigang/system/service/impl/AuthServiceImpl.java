@@ -1,7 +1,7 @@
 package com.zhangkaigang.system.service.impl;
 
 import com.zhangkaigang.base.pojo.node.ZTreeNode;
-import com.zhangkaigang.base.utils.IdWorker;
+import com.zhangkaigang.base.service.BaseService;
 import com.zhangkaigang.base.utils.PoJoConverterUtil;
 import com.zhangkaigang.system.dao.AuthDao;
 import com.zhangkaigang.system.pojo.dto.AuthDTO;
@@ -23,13 +23,10 @@ import java.util.List;
  * @Version:1.0
  */
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl  extends BaseService implements AuthService {
 
     @Autowired
     private AuthDao authDao;
-
-    @Autowired
-    private IdWorker idWorker;
 
     @Override
     public List<AuthDTO> listTree(String condition, String levels) {

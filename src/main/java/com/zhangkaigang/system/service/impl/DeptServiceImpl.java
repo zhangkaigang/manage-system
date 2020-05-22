@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.pojo.node.LayuiTreeNode;
 import com.zhangkaigang.base.pojo.node.ZTreeNode;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
-import com.zhangkaigang.base.utils.IdWorker;
+import com.zhangkaigang.base.service.BaseService;
 import com.zhangkaigang.base.utils.PoJoConverterUtil;
 import com.zhangkaigang.system.dao.DeptDao;
 import com.zhangkaigang.system.pojo.dto.DeptDTO;
@@ -25,13 +25,10 @@ import java.util.List;
  * @Version:1.0
  */
 @Service
-public class DeptServiceImpl implements DeptService {
+public class DeptServiceImpl extends BaseService implements DeptService {
 
     @Autowired
     private DeptDao deptDao;
-
-    @Autowired
-    private IdWorker idWorker;
 
     @Override
     public List<LayuiTreeNode> getDeptLayuiTree() {

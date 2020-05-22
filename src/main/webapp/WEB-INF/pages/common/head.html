@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<body>
-    <header th:fragment="header">
-        <div class="layui-header">
-            <div class="layui-logo">
-                <cite>后台管理系统</cite>
-            </div>
-            <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item" lay-unselect>
-                    <a ew-event="flexible" title="侧边伸缩"><i class="layui-icon layui-icon-shrink-right"></i></a>
-                </li>
-                <li class="layui-nav-item" lay-unselect>
-                    <a ew-event="refresh" title="刷新"><i class="layui-icon layui-icon-refresh-3"></i></a>
-                </li>
-                <li class="layui-nav-item layui-hide-xs layui-this" lay-unselect><a>基础功能</a></li>
-                <li class="layui-nav-item layui-hide-xs" lay-unselect><a>扩展功能</a></li>
-            </ul>
-
-            <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item" lay-unselect>
-                    <a ew-event="message" title="消息"><i class="layui-icon layui-icon-notice"></i></a>
-                </li>
-
-                <li class="layui-nav-item" lay-unselect>
-                    <a>
-                        <img src="" class="layui-nav-img">
-                        <cite>张三四</cite>
-                        <span class="layui-nav-more"></span>
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd lay-unselect>
-                            <a ew-href="/system/user_info">个人信息</a>
-                        </dd>
-                        <dd lay-unselect>
-                            <a id="setPsw">修改密码</a>
-                        </dd>
-                        <hr>
-                        <dd lay-unselect>
-                            <a id="btnLogout">退出</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item" lay-unselect>
-                    <a ew-event="theme" title="主题"><i class="layui-icon layui-icon-more-vertical"></i></a>
-                </li>
-            </ul>
-
+<header th:fragment="header">
+        <div class="layui-logo">
+            <cite>后台管理系统</cite>
         </div>
-    </header>
-</body>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item" lay-unselect>
+                <a ew-event="flexible" title="侧边伸缩"><i class="layui-icon layui-icon-shrink-right"></i></a>
+            </li>
+            <li class="layui-nav-item" lay-unselect>
+                <a ew-event="refresh" title="刷新"><i class="layui-icon layui-icon-refresh-3"></i></a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs layui-this" lay-unselect><a>基础功能</a></li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect><a>扩展功能</a></li>
+        </ul>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item" lay-unselect>
+                <a ew-event="message" title="消息"><i class="layui-icon layui-icon-notice"></i></a>
+            </li>
+
+            <li class="layui-nav-item" lay-unselect>
+                <a>
+                    <img src="" class="layui-nav-img">
+                    <cite>张三四</cite>
+                    <span class="layui-nav-more"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd lay-unselect>
+                        <a ew-href="/system/user_info">个人信息</a>
+                    </dd>
+                    <dd lay-unselect>
+                        <a id="setPsw">修改密码</a>
+                    </dd>
+                    <hr>
+                    <dd lay-unselect>
+                        <a id="btnLogout">退出</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" lay-unselect>
+                <a ew-event="theme" title="主题"><i class="layui-icon layui-icon-more-vertical"></i></a>
+            </li>
+        </ul>
+</header>
 </html>
