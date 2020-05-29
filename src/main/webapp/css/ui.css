@@ -456,7 +456,8 @@ body {
     bottom: 0;
 }
 .content-page-body{
-    background-color: #fff
+    background-color: #fff;
+    overflow-y: auto;
 }
 .layui-form-pane .layui-input-inline {
     margin-left: 0;

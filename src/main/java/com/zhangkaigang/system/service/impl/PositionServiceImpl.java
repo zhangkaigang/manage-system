@@ -5,9 +5,12 @@ import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
 import com.zhangkaigang.base.service.BaseService;
 import com.zhangkaigang.base.utils.PoJoConverterUtil;
 import com.zhangkaigang.system.dao.PositionDao;
+import com.zhangkaigang.system.dao.UserPositionDao;
 import com.zhangkaigang.system.pojo.dto.PositionDTO;
 import com.zhangkaigang.system.pojo.po.Position;
+import com.zhangkaigang.system.pojo.po.UserPosition;
 import com.zhangkaigang.system.service.PositionService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,9 @@ public class PositionServiceImpl extends BaseService implements PositionService 
 
     @Autowired
     private PositionDao positionDao;
+
+    @Autowired
+    private UserPositionDao userPositionDao;
 
     @Override
     public PageInfo<PositionDTO> list(String name) {
@@ -76,5 +82,15 @@ public class PositionServiceImpl extends BaseService implements PositionService 
         positionDao.updateByPrimaryKeySelective(position);
     }
 
-
+    @Override
+    public List<PositionDTO> findAllPositions(Long userId) {
+        List<Position> positionList = new ArrayList<>();
+        if(userId != null) {
+            positionList = positionDao.findPositionsByUserId(userId);
+        } else {
+            positionList = positionDao.selectAll();
+        }
+        List<PositionDTO> positionDTOList = PoJoConverterUtil.objectListConverter(positionList, PositionDTO.class);
+        return positionDTOList;
+    }
 }

@@ -1,5 +1,8 @@
 package com.zhangkaigang.system.service;
 
+import com.github.pagehelper.PageInfo;
+import com.zhangkaigang.system.pojo.dto.UserDTO;
+
 /**
  * @Description:TODO
  * @Author:zhang.kaigang
@@ -7,4 +10,12 @@ package com.zhangkaigang.system.service;
  * @Version:1.0
  */
 public interface UserService {
+
+    /**
+     * 用户列表分页
+     * @param condition
+     * @param deptId
+     * @return
+     */
+    PageInfo<UserDTO> list(String condition, Long deptId);
 }

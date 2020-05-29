@@ -3,6 +3,8 @@ package com.zhangkaigang.system.service;
 import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.system.pojo.dto.PositionDTO;
 
+import java.util.List;
+
 /**
  * @Description:TODO
  * @Author:zhang.kaigang
@@ -43,4 +45,10 @@ public interface PositionService {
      */
     void edit(PositionDTO positionDTO);
 
+    /**
+     * 查询所有职位
+     * @param userId
+     * @return
+     */
+    List<PositionDTO> findAllPositions(Long userId);
 }

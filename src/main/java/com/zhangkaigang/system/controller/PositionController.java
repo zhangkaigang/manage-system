@@ -137,4 +137,15 @@ public class PositionController {
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 
+    /**
+     * 查询所有职位列表，不分页
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/findAllPositions")
+    public LayuiPageInfo findAllPositions(@RequestParam(value = "userId", required = false) Long userId) {
+        positionService.findAllPositions(userId);
+        return null;
+    }
+
 }
