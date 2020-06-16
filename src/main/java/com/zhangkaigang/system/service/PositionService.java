@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.system.pojo.dto.PositionDTO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:TODO
@@ -46,9 +47,9 @@ public interface PositionService {
     void edit(PositionDTO positionDTO);
 
     /**
-     * 查询所有职位
+     * 查询下拉多选框的职位列表
      * @param userId
      * @return
      */
-    List<PositionDTO> findAllPositions(Long userId);
+    List<Map<String, Object>> findAllPositions(Long userId);
 }

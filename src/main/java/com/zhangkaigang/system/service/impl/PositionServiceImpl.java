@@ -16,10 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Description:TODO
@@ -83,14 +80,25 @@ public class PositionServiceImpl extends BaseService implements PositionService 
     }
 
     @Override
-    public List<PositionDTO> findAllPositions(Long userId) {
-        List<Position> positionList = new ArrayList<>();
+    public List<Map<String, Object>> findAllPositions(Long userId) {
+        List<Map<String, Object>> positionList = positionDao.selectAllPositions();
         if(userId != null) {
-            positionList = positionDao.findPositionsByUserId(userId);
-        } else {
-            positionList = positionDao.selectAll();
+            Example example = new Example(UserPosition.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("userId", userId);
+            List<UserPosition> userPositionList = userPositionDao.selectByExample(example);
+            if(CollectionUtils.isNotEmpty(userPositionList)) {
+                for (Map<String, Object> positionMap : positionList) {
+                    Object positionId = positionMap.get("positionId");
+                    for (UserPosition userPosition : userPositionList) {
+                        if (userPosition.getPositionId().equals(positionId)) {
+                            positionMap.put("selected", true);
+                        }
+                    }
+                }
+
+            }
         }
-        List<PositionDTO> positionDTOList = PoJoConverterUtil.objectListConverter(positionList, PositionDTO.class);
-        return positionDTOList;
+        return positionList;
     }
 }

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description:TODO
  * @Author:zhang.kaigang
@@ -143,9 +146,12 @@ public class PositionController {
      * @return
      */
     @RequestMapping("/findAllPositions")
+    @ResponseBody
     public LayuiPageInfo findAllPositions(@RequestParam(value = "userId", required = false) Long userId) {
-        positionService.findAllPositions(userId);
-        return null;
+        List<Map<String, Object>> resultList = positionService.findAllPositions(userId);
+        LayuiPageInfo layuiPageInfo = new LayuiPageInfo();
+        layuiPageInfo.setData(resultList);
+        return layuiPageInfo;
     }
 
 }

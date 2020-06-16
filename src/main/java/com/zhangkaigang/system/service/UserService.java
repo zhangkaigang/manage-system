@@ -18,4 +18,10 @@ public interface UserService {
      * @return
      */
     PageInfo<UserDTO> list(String condition, Long deptId);
+
+    /**
+     * 新增用户
+     * @param userDTO
+     */
+    void add(UserDTO userDTO);
 }

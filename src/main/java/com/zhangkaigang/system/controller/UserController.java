@@ -1,6 +1,8 @@
 package com.zhangkaigang.system.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.zhangkaigang.base.enums.StatusCodeEnum;
+import com.zhangkaigang.base.pojo.common.Result;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
 import com.zhangkaigang.base.pojo.page.LayuiPageInfo;
 import com.zhangkaigang.system.pojo.dto.UserDTO;
@@ -59,6 +61,19 @@ public class UserController {
     @RequestMapping("/addPage")
     public String addPage() {
         return PRIFIX + "user_add";
+    }
+
+    /**
+     * 添加用户
+     * @param userDTO
+     * @return
+     */
+    @RequestMapping("/add")
+    @ResponseBody
+    @ApiOperation(value = "添加用户", httpMethod = "POST")
+    public Result add(UserDTO userDTO) {
+        userService.add(userDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 
 

@@ -1,7 +1,7 @@
 <formContent th:fragment="form">
     <form id="userForm" class="layui-form" action="">
         <input type="hidden" name="userId" id="userId" value=""/>
-        <div>
+        <div class="layui-card">
             <div class="layui-card-header">
                 基本信息
             </div>
@@ -38,7 +38,8 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="layui-card" style="margin-bottom: 35px;">
             <div class="layui-card-header">
                 职务信息
             </div>
@@ -59,11 +60,9 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group-bottom text-center">
             <button class="layui-btn" lay-filter="btnSave" data-type="btnSave" lay-submit>&emsp;保存&emsp;</button>
             <div class="layui-btn layui-btn-primary" data-type="btnCancel">&emsp;取消&emsp;</div>
         </div>
-
     </form>
 </formContent>

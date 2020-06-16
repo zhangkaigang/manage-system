@@ -18,9 +18,17 @@
         position_id , name, status, sort,  description, create_user, create_time, modify_user, modify_time
     </sql>
 
-    <select id="findPositionsByUserId" resultMap="BaseResultMap">
+    <select id="selectAllPositions" resultType="java.util.Map">
         select
-        a.position_id,
+        position_id positionId,
+        name
+        from sys_position
+        order by sort ASC
+    </select>
+
+    <select id="findPositionsByUserId" resultType="java.util.Map">
+        select
+        a.position_id positionId,
         b.name
         from sys_user_position a
         left join sys_position b
@@ -29,7 +37,7 @@
         <if test="userId != null and userId != ''">
             and a.user_id =  #{userId}
         </if>
-        order by sort ASC
+        order by b.sort ASC
     </select>
 
 </mapper>

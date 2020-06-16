@@ -113,6 +113,9 @@ layui.use(['layer', 'table', 'form'], function () {
             tableIns.reload({
                 where:{
                     name : $('#searchName').val().trim()
+                },
+                page: {
+                    curr: 1
                 }
             });
         },

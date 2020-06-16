@@ -93,6 +93,9 @@ layui.use(['layer', 'table'], function () {
             tableIns.reload({
                 where:{
                     condition : $('#searchName').val().trim()
+                },
+                page: {
+                    curr: 1
                 }
             });
         }

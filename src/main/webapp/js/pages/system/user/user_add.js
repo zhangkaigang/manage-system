@@ -12,6 +12,8 @@ layui.config({
         keyName: 'name',
         keyVal: 'positionId'
     });
+    formSelects.render();
+
     // 点击所属部门时
     $('#deptName').click(function () {
         commonFuns.openDeptTree();

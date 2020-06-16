@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:TODO
@@ -17,9 +18,15 @@ import java.util.List;
 public interface PositionDao extends Mapper<Position> {
 
     /**
-     * 职位列表查询，如果有用户则查询用户拥有的职位列表
+     * 查询用户拥有的下拉多选职位列表
      * @param userId
      * @return
      */
-    List<Position> findPositionsByUserId(@Param("userId") Long userId);
+    List<Map<String, Object>> findPositionsByUserId(@Param("userId") Long userId);
+
+    /**
+     * 查询下拉多选框的职位列表
+     * @return
+     */
+    List<Map<String, Object>> selectAllPositions();
 }

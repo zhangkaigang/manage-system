@@ -101,8 +101,8 @@ var commonFuns = {
         var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
     },
-    // 打开部门树
-    openDeptTree : function(){
+    // 打开父级部门树
+    openParentDeptTree : function(){
         layer.open({
             type: 2,
             title: '父级部门',
@@ -112,6 +112,21 @@ var commonFuns = {
                 if (selectedNode && JSON.stringify(selectedNode) != '{}') {
                     $("#parentId").val(selectedNode.id);
                     $("#parentName").val(selectedNode.name);
+                }
+            }
+        });
+    },
+    // 打开部门树
+    openDeptTree : function(){
+        layer.open({
+            type: 2,
+            title: '所属部门',
+            area: ['400px', '420px'],
+            content: contextPath + '/sys/dept/deptTreePage',
+            end: function () {
+                if (selectedNode && JSON.stringify(selectedNode) != '{}') {
+                    $("#deptId").val(selectedNode.id);
+                    $("#deptName").val(selectedNode.name);
                 }
             }
         });

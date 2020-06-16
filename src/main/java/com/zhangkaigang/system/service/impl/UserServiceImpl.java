@@ -45,4 +45,9 @@ public class UserServiceImpl  extends BaseService implements UserService {
         List<UserDTO> userDTOList = PoJoConverterUtil.objectListConverter(userList, UserDTO.class);
         return LayuiPageFactory.getPageInfo(userDTOList);
     }
+
+    @Override
+    public void add(UserDTO userDTO) {
+
+    }
 }

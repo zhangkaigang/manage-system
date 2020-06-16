@@ -4,7 +4,7 @@ layui.use(['form'], function () {
 
     // 点击上级部门时
     $('#parentName').click(function () {
-        commonFuns.openDeptTree();
+        commonFuns.openParentDeptTree();
     });
 
     // 按钮点击事件

@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--head部分-->
 <head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+<link rel="stylesheet" th:href="@{/js/layui/extend/formSelects/formSelects-v4.css}">
 
 <body class="content-page-body">
 
 <!-- 表单部分 -->
-<div th:include="system/user/user_form :: form"></div>
+<div class="layui-fluid" th:include="system/user/user_form :: form"></div>
 
 <script th:src="@{/js/pages/system/user/user_add.js}"></script>
 </body>

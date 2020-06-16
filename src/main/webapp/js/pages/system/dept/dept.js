@@ -81,6 +81,9 @@ layui.use(['tree', 'table'], function () {
                 where:{
                     deptName : $('#searchName').val().trim(),
                     deptId : condition.deptId
+                },
+                page: {
+                    curr: 1
                 }
             });
         },
