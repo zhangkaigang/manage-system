@@ -1,6 +1,8 @@
 package com.zhangkaigang.system.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.zhangkaigang.base.constant.CacheFactory;
+import com.zhangkaigang.base.constant.CommonConstants;
 import com.zhangkaigang.base.enums.StatusCodeEnum;
 import com.zhangkaigang.base.pojo.common.Result;
 import com.zhangkaigang.base.pojo.page.LayuiPageFactory;
@@ -8,11 +10,17 @@ import com.zhangkaigang.base.pojo.page.LayuiPageInfo;
 import com.zhangkaigang.system.pojo.dto.UserDTO;
 import com.zhangkaigang.system.service.UserService;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.CollectionUtils;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:TODO
@@ -28,6 +36,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CacheFactory cacheFactory;
 
     /**
      * 用户管理页面
@@ -50,7 +61,14 @@ public class UserController {
     public LayuiPageInfo list(@RequestParam(value = "condition", required = false) String condition,
                               @RequestParam(value = "deptId", required = false) Long deptId) {
         PageInfo<UserDTO> pageInfo = userService.list(condition, deptId);
-        LayuiPageInfo layuiPageInfo = LayuiPageFactory.createPageInfo(pageInfo.getTotal(), pageInfo.getList());
+        List<UserDTO> userDTOList = pageInfo.getList();
+        if(CollectionUtils.isNotEmpty(userDTOList)) {
+            for (UserDTO userDTO : userDTOList) {
+                userDTO.setDeptName(cacheFactory.getDeptName(userDTO.getDeptId()));
+                userDTO.setPositionNames(cacheFactory.getPositionNames(userDTO.getUserId()));
+            }
+        }
+        LayuiPageInfo layuiPageInfo = LayuiPageFactory.createPageInfo(pageInfo.getTotal(), userDTOList);
         return layuiPageInfo;
     }
 
@@ -72,9 +90,120 @@ public class UserController {
     @ResponseBody
     @ApiOperation(value = "添加用户", httpMethod = "POST")
     public Result add(UserDTO userDTO) {
+        // 判断登录名是否存在
+        UserDTO existUserDTO = userService.findByLoginName(userDTO.getLoginName());
+        if(existUserDTO != null) {
+            return new Result(false,  StatusCodeEnum.ERROR.getStatusCode(), "登录名已存在");
+        }
         userService.add(userDTO);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
     }
 
+    /**
+     * 删除用户
+     * @param userIds
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(@RequestParam("userIds") String userIds) {
+        userService.delete(userIds);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
 
+    /**
+     * 修改用户页面
+     * @return
+     */
+    @RequestMapping("/editPage")
+    public String editPage() {
+        return PRIFIX + "user_edit";
+    }
+
+    /**
+     * 根据用户id查询用户
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/findByUserId/{userId}")
+    @ResponseBody
+    public Result findByUserId(@PathVariable("userId") Long userId) {
+        UserDTO userDTO = userService.findByUserId(userId);
+        userDTO.setDeptName(cacheFactory.getDeptName(userDTO.getDeptId()));
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), userDTO);
+    }
+
+    /**
+     * 编辑
+     * @param userDTO
+     * @return
+     */
+    @RequestMapping("/edit")
+    @ResponseBody
+    @ApiOperation(value = "编辑用户", httpMethod = "POST")
+    public Result edit(UserDTO userDTO) {
+        userService.edit(userDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 改变状态
+     * @param userId
+     * @param status
+     * @return
+     */
+    @RequestMapping("/changeStatus/{userId}/{status}")
+    @ResponseBody
+    public Result changeStatus(@PathVariable("userId") Long userId,
+                               @PathVariable("status") String status
+                            ) {
+        UserDTO userDTO = userService.findByUserId(userId);
+        userDTO.setStatus(status);
+        userService.edit(userDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 重置密码
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/resetPwd/{userId}")
+    @ResponseBody
+    public Result resetPwd(@PathVariable("userId") Long userId) {
+        UserDTO userDTO = userService.findByUserId(userId);
+        String encodePwd = BCrypt.hashpw(CommonConstants.DEFAULT_PWD, BCrypt.gensalt());
+        userDTO.setPassword(encodePwd);
+        userService.edit(userDTO);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    /**
+     * 分配角色页面
+     * @return
+     */
+    @RequestMapping("/assignRolePage")
+    public String assignRolePage() {
+        return PRIFIX + "user_assign_role";
+    }
+
+    /**
+     * 获取分配角色穿梭框数据
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/getAssignRoleData/{userId}")
+    @ResponseBody
+    public Result getAssignRoleData(@PathVariable("userId") Long userId) {
+        Map<String, Object> resultMap = userService.getAssignRoleData(userId);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode(), resultMap);
+    }
+
+    @RequestMapping("/assignRole")
+    @ResponseBody
+    public Result assignRole(@RequestParam(value = "roleIds", required = false) String roleIds,
+                             @RequestParam(value = "userId") Long userId) {
+        userService.assignRole(roleIds, userId);
+        return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
 }

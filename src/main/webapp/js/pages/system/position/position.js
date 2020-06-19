@@ -67,13 +67,6 @@ layui.use(['layer', 'table', 'form'], function () {
                 var url = contextPath + "/sys/position/changeStatus/" + positionId + "/" + status;
                 var returnData = commonFuns.$Ajax(url);
                 commonFuns.dealResult(returnData);
-                // 加载load方法
-                tableIns.reload({
-                    where: obj.field
-                    , page: {
-                        curr: page
-                    }
-                });
             }, function(){
                 // 加载load方法
                 tableIns.reload({

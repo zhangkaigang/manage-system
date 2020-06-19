@@ -10,6 +10,7 @@ import com.zhangkaigang.system.pojo.dto.PositionDTO;
 import com.zhangkaigang.system.pojo.po.Position;
 import com.zhangkaigang.system.pojo.po.UserPosition;
 import com.zhangkaigang.system.service.PositionService;
+import com.zhangkaigang.system.service.UserPositionService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class PositionServiceImpl extends BaseService implements PositionService 
 
     @Autowired
     private PositionDao positionDao;
+
+    @Autowired
+    private UserPositionService userPositionService;
 
     @Autowired
     private UserPositionDao userPositionDao;
@@ -60,9 +64,12 @@ public class PositionServiceImpl extends BaseService implements PositionService 
                 new ArrayList(Arrays.asList(positionIds.split(","))) : new ArrayList<>();
         Example example = new Example(Position.class);
         Example.Criteria criteria = example.createCriteria();
-        // Arrays.asList，则不能用remove和add这样的方法，因为其返回的类型是 Aarrays$ArrayList 并不是 ArrayList
+        // Arrays.asList，则不能用remove和add这样的方法，因为其返回的类型是 Arrays$ArrayList 并不是 ArrayList
         criteria.andIn("positionId", positionIdsList);
         positionDao.deleteByExample(example);
+
+        // 删除职位用户关联
+        userPositionService.deleteByPositionIdList(positionIdsList);
     }
 
     @Override

@@ -58,6 +58,11 @@ public class UserDTO {
     private Long deptId;
 
     /**
+     * 所属部门名称
+     */
+    private String deptName;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -81,6 +86,11 @@ public class UserDTO {
      * 职位id，以逗号隔开
      */
     private String positionIds;
+
+    /**
+     * 职位名称，以逗号隔开
+     */
+    private String positionNames;
 
     /**
      * 验证码
@@ -164,6 +174,14 @@ public class UserDTO {
         this.deptId = deptId;
     }
 
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -202,6 +220,14 @@ public class UserDTO {
 
     public void setPositionIds(String positionIds) {
         this.positionIds = positionIds;
+    }
+
+    public String getPositionNames() {
+        return positionNames;
+    }
+
+    public void setPositionNames(String positionNames) {
+        this.positionNames = positionNames;
     }
 
     public String getVerifyCode() {

@@ -1,3 +1,4 @@
+var selectedNode = {};
 layui.config({
     base: contextPath + '/js/layui/extend/formSelects/'
 }).extend({

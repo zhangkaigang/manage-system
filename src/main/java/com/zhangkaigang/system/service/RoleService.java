@@ -66,4 +66,5 @@ public interface RoleService {
      * @param authIds
      */
     void saveRoleAuth(Long roleId, String authIds);
+
 }

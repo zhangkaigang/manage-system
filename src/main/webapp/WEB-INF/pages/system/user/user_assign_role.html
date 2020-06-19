@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
+
+<body style="background-color: #fff">
+<div>
+    <div id="assignRole" style="text-align: center; margin-top: 5px"></div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn layui-btn-sm" data-type="btnSave">&emsp;保存&emsp;</button>
+        <button class="layui-btn layui-btn-sm layui-btn-primary" data-type="btnCancel">&emsp;取消&emsp;</button>
+    </div>
+</div>
+
+<script th:src="@{/js/pages/system/user/user_assign_role.js}"></script>
+</body>
+</html>

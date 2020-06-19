@@ -7,6 +7,7 @@ import com.zhangkaigang.system.dao.AuthDao;
 import com.zhangkaigang.system.pojo.dto.AuthDTO;
 import com.zhangkaigang.system.pojo.po.Auth;
 import com.zhangkaigang.system.service.AuthService;
+import com.zhangkaigang.system.service.RoleAuthService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class AuthServiceImpl  extends BaseService implements AuthService {
 
     @Autowired
     private AuthDao authDao;
+
+    @Autowired
+    private RoleAuthService roleAuthService;
 
     @Override
     public List<AuthDTO> listTree(String condition, String levels) {
@@ -78,6 +82,8 @@ public class AuthServiceImpl  extends BaseService implements AuthService {
         List<Auth> authList = selectByParentId(authId);
         if(CollectionUtils.isNotEmpty(authList)) {
             for (Auth auth : authList) {
+                // 删除角色权限关联
+                roleAuthService.deleteByAuthId(auth.getAuthId());
                 delete(auth.getAuthId());
             }
         }

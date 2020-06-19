@@ -9,7 +9,9 @@ import com.zhangkaigang.system.dao.RoleDao;
 import com.zhangkaigang.system.pojo.dto.RoleDTO;
 import com.zhangkaigang.system.pojo.po.Role;
 import com.zhangkaigang.system.pojo.po.RoleAuth;
+import com.zhangkaigang.system.service.RoleAuthService;
 import com.zhangkaigang.system.service.RoleService;
+import com.zhangkaigang.system.service.UserRoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,12 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
     @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
+    private RoleAuthService roleAuthService;
 
     @Autowired
     private RoleAuthDao roleAuthDao;
@@ -70,15 +78,13 @@ public class RoleServiceImpl extends BaseService implements RoleService {
     public void delete(String roleIds) {
         List<Long> roleIdsList = StringUtils.isNotEmpty(roleIds) ?
                 new ArrayList(Arrays.asList(roleIds.split(","))) : new ArrayList<>();
+        // 删除用户角色关联和角色权限关联
+        roleAuthService.deleteByRoleIdList(roleIdsList);
+        userRoleService.deleteByRoleIdList(roleIdsList);
         Example example = new Example(Role.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andIn("roleId", roleIdsList);
         roleDao.deleteByExample(example);
-
-        Example roleAuthExample = new Example(RoleAuth.class);
-        Example.Criteria roleAuthCriteria = roleAuthExample.createCriteria();
-        roleAuthCriteria.andIn("roleId", roleIdsList);
-        roleAuthDao.deleteByExample(roleAuthExample);
     }
 
     @Override
