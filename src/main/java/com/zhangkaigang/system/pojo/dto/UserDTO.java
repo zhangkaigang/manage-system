@@ -70,12 +70,12 @@ public class UserDTO {
     /**
      * 菜单权限
      */
-    private List<Auth> menuList;
+    private List<AuthDTO> menuList;
 
     /**
      * 功能权限
      */
-    private List<Auth> authList;
+    private List<AuthDTO> authList;
 
     /**
      * 角色id，以逗号隔开
@@ -190,19 +190,19 @@ public class UserDTO {
         this.createTime = createTime;
     }
 
-    public List<Auth> getMenuList() {
+    public List<AuthDTO> getMenuList() {
         return menuList;
     }
 
-    public void setMenuList(List<Auth> menuList) {
+    public void setMenuList(List<AuthDTO> menuList) {
         this.menuList = menuList;
     }
 
-    public List<Auth> getAuthList() {
+    public List<AuthDTO> getAuthList() {
         return authList;
     }
 
-    public void setAuthList(List<Auth> authList) {
+    public void setAuthList(List<AuthDTO> authList) {
         this.authList = authList;
     }
 

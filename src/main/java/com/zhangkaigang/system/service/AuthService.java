@@ -46,4 +46,22 @@ public interface AuthService {
      */
     void delete(Long authId);
 
+    /**
+     * 找到所有权限数据
+     * @param authType
+     * @param parentId
+     * @return
+     */
+    List<AuthDTO> findAll(Integer authType, Long parentId);
+
+    /**
+     * 根据用户ID查询用户关联的权限
+     * @param userId
+     * @param authType
+     * @param parentId
+     * @return
+     */
+    List<AuthDTO> findByUserId(Long userId, Integer authType, Long parentId);
+
+
 }

@@ -103,4 +103,71 @@ public class AuthServiceImpl  extends BaseService implements AuthService {
         return authDao.selectByExample(example);
     }
 
+    @Override
+    public List<AuthDTO> findAll(Integer authType, Long parentId) {
+        List<AuthDTO> authDTOList = findAllByAuthTypeAndParentId(authType, parentId);
+        getChildAuthDTOList(authDTOList, authType);
+        return authDTOList;
+    }
+
+    @Override
+    public List<AuthDTO> findByUserId(Long userId, Integer authType, Long parentId) {
+        List<Auth> authList = authDao.findByUserId(userId, authType, parentId);
+        List<AuthDTO> authDTOList = PoJoConverterUtil.objectListConverter(authList, AuthDTO.class);
+        if(authType == 1) {
+            // 如果是菜单，则递归
+            getChildAuthDTOListByUserId(authDTOList, userId, authType);
+        }
+        return authDTOList;
+    }
+
+    /**
+     * 根据authType和parentId查询权限数据
+     * @param authType
+     * @param parentId
+     * @return
+     */
+    private List<AuthDTO> findAllByAuthTypeAndParentId(Integer authType, Long parentId) {
+        Example example = new Example(Auth.class);
+        Example.Criteria criteria = example.createCriteria();
+        // 添加条件
+        criteria.andEqualTo("authType", authType);
+        criteria.andEqualTo("parentId", parentId);
+        example.orderBy("sort").asc();
+        List<Auth> authList = authDao.selectByExample(example);
+        List<AuthDTO> authDTOList = PoJoConverterUtil.objectListConverter(authList, AuthDTO.class);
+        return authDTOList;
+    }
+
+    /**
+     * 根据authType递归查询所有权限数据
+     * @param authDTOList
+     * @param authType
+     */
+    private void getChildAuthDTOList(List<AuthDTO> authDTOList, Integer authType) {
+        if(CollectionUtils.isNotEmpty(authDTOList)) {
+            for (AuthDTO authDTO : authDTOList) {
+                List<AuthDTO> childAuthDTOList = findAllByAuthTypeAndParentId(authType, authDTO.getAuthId());
+                authDTO.setChildren(childAuthDTOList);
+                getChildAuthDTOList(childAuthDTOList, authType);
+            }
+        }
+    }
+
+    /**
+     * 根据authType和userId递归查询用户所拥有的权限数据
+     * @param authDTOList
+     * @param userId
+     * @param authType
+     */
+    private void getChildAuthDTOListByUserId(List<AuthDTO> authDTOList, Long userId, Integer authType) {
+        if(CollectionUtils.isNotEmpty(authDTOList)) {
+            for (AuthDTO authDTO : authDTOList) {
+                List<Auth> childAuthList = authDao.findByUserId(userId, authType, authDTO.getAuthId());
+                List<AuthDTO> childAuthDTOList = PoJoConverterUtil.objectListConverter(childAuthList, AuthDTO.class);
+                authDTO.setChildren(childAuthDTOList);
+                getChildAuthDTOListByUserId(childAuthDTOList, userId, authType);
+            }
+        }
+    }
 }

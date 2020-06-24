@@ -27,8 +27,29 @@ layui.use(["layer", "element"], function () {
 
     });
 
+    $(document).on("click", "*[ew-event]", function () {
+        var ewEvent = $(this).attr("ew-event");
+        active[ewEvent] ? active[ewEvent].call(this) : '';
+    });
+
+
     // 定义函数
     var active = {
+        // 侧边收缩
+        flexible: function () {
+            active.strToWin($(this).data("window")).layui.admin.flexible()
+        },
+        strToWin : function (s) {
+            var r = window;
+            if (!s) {
+                return r
+            }
+            var p = s.split(".");
+            for (var q = 0; q < p.length; q++) {
+                r = r[p[q]]
+            }
+            return r
+        },
         // 增加tab标签
         tabAdd : function (title, url, id) {
             // 新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值

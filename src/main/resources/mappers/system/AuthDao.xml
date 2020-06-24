@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangkaigang.system.dao.AuthDao">
+    <resultMap id="BaseResultMap" type="com.zhangkaigang.system.pojo.po.Auth">
+        <id column="auth_id"  property="authId"/>
+        <result column="auth_code"  property="authCode"/>
+        <result column="parent_id"  property="parentId"/>
+        <result column="auth_type"  property="authType"/>
+        <result column="levels"  property="levels"/>
+        <result column="name"  property="name"/>
+        <result column="url"  property="url"/>
+        <result column="icon"  property="icon"/>
+        <result column="description"  property="description"/>
+        <result column="sort"  property="sort"/>
+        <result column="create_user"  property="createUser"/>
+        <result column="create_time"  property="createTime"/>
+        <result column="modify_user"  property="modifyUser"/>
+        <result column="modify_time"  property="modifyTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        authId , authCode, parentId, authType,  levels, name, url, icon, description, create_user, create_time, modify_user, modify_time
+    </sql>
+
+    <select id="findByUserId" resultMap="BaseResultMap">
+        select a.*
+        from sys_auth a
+        left join sys_role_auth b on a.auth_id = b.auth_id
+        left join sys_role c on b.role_id = c.role_id
+        left join sys_user_role d on c.role_id = d.role_id
+        where 1 =1
+        and d.user_id = #{userId}
+        and a.auth_type = #{authType}
+        <if test="parentId != null and parentId != '' ">
+            and a.parent_id = #{parentId}
+        </if>
+        order by sort;
+    </select>
+
+</mapper>
+

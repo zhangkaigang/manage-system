@@ -9,8 +9,9 @@ layui.use(['tree', 'table', 'form'], function () {
         {field: 'userName', align: "center", sort: true, title: '姓名'},
         {field: 'deptName', align: "center", sort: true, title: '部门'},
         {field: 'positionNames', align: "center", sort: true, title: '职位'},
-        {field: 'createTime', align: "center", sort: true, title: '创建时间'},
-        {field: 'positionNames', align: "center", sort: true, title: '职位'},
+        {field: 'createTime', align: "center", sort: true, title: '创建时间', templet: function (d) {
+                return d.createTime ? dayjs(d.createTime).format('YYYY-MM-DD HH:mm') : '';
+            }},
         {field: 'status', align: "center", sort: true, title: '状态', templet: '#statusTpl'},
         {align: 'center', toolbar: '#btnBar', title: '操作', minWidth: 300}
     ]];
@@ -28,9 +29,6 @@ layui.use(['tree', 'table', 'form'], function () {
             // 是否仅允许节点左侧图标控制展开收缩
             onlyIconControl: true,
             click: function(obj){
-                var data = obj.data;
-                // condition.deptId = data.id;
-                // deptFuns.search();
             }
         });
     } else {

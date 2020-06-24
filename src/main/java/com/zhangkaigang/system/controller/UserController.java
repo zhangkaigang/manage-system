@@ -1,5 +1,6 @@
 package com.zhangkaigang.system.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.zhangkaigang.base.constant.CacheFactory;
 import com.zhangkaigang.base.constant.CommonConstants;
@@ -11,6 +12,7 @@ import com.zhangkaigang.system.pojo.dto.UserDTO;
 import com.zhangkaigang.system.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,6 +79,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/addPage")
+    @RequiresPermissions("user:add")
     public String addPage() {
         return PRIFIX + "user_add";
     }
@@ -106,6 +109,7 @@ public class UserController {
      */
     @RequestMapping("/delete")
     @ResponseBody
+    @RequiresPermissions("user:delete")
     public Result delete(@RequestParam("userIds") String userIds) {
         userService.delete(userIds);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
@@ -116,6 +120,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/editPage")
+    @RequiresPermissions("user:edit")
     public String editPage() {
         return PRIFIX + "user_edit";
     }
@@ -154,6 +159,7 @@ public class UserController {
      */
     @RequestMapping("/changeStatus/{userId}/{status}")
     @ResponseBody
+    @RequiresPermissions("user:changeStatus")
     public Result changeStatus(@PathVariable("userId") Long userId,
                                @PathVariable("status") String status
                             ) {
@@ -170,6 +176,7 @@ public class UserController {
      */
     @RequestMapping("/resetPwd/{userId}")
     @ResponseBody
+    @RequiresPermissions("user:resetPwd")
     public Result resetPwd(@PathVariable("userId") Long userId) {
         UserDTO userDTO = userService.findByUserId(userId);
         String encodePwd = BCrypt.hashpw(CommonConstants.DEFAULT_PWD, BCrypt.gensalt());
@@ -183,6 +190,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/assignRolePage")
+    @RequiresPermissions("user:assignRole")
     public String assignRolePage() {
         return PRIFIX + "user_assign_role";
     }
@@ -199,11 +207,44 @@ public class UserController {
         return new Result(true, StatusCodeEnum.OK.getStatusCode(), resultMap);
     }
 
+    /**
+     * 分配角色
+     * @param roleIds
+     * @param userId
+     * @return
+     */
     @RequestMapping("/assignRole")
     @ResponseBody
     public Result assignRole(@RequestParam(value = "roleIds", required = false) String roleIds,
                              @RequestParam(value = "userId") Long userId) {
         userService.assignRole(roleIds, userId);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
+    }
+
+    @RequestMapping("/login")
+    @ResponseBody
+    public Object login() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonStr = "{\"code\":20000,\"data\":{\"token\":\"admin-token\"}}";
+        Map map = mapper.readValue(jsonStr, Map.class);
+        return map;
+    }
+
+    @RequestMapping("/info")
+    @ResponseBody
+    public Object info() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonStr = "{\"code\":20000,\"data\":{\"roles\":[\"admin\"],\"introduction\":\"I am a super administrator\",\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\",\"name\":\"Super Admin\"}}";
+        Map map = mapper.readValue(jsonStr, Map.class);
+        return map;
+    }
+
+    @RequestMapping("/getClientList")
+    @ResponseBody
+    public Object getClientList() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonStr = "{\"code\":20000,\"data\":[{\"clientCode\":\"0001\", \"clientName\":\"测试客户\"}]}";
+        Map map = mapper.readValue(jsonStr, Map.class);
+        return map;
     }
 }

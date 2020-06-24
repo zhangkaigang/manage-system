@@ -24,7 +24,7 @@
             <li class="layui-nav-item" lay-unselect>
                 <a>
                     <img src="" class="layui-nav-img">
-                    <cite>张三四</cite>
+                    <cite shiro:principal property="userName">张三四</cite>
                     <span class="layui-nav-more"></span>
                 </a>
                 <dl class="layui-nav-child">
@@ -36,7 +36,7 @@
                     </dd>
                     <hr>
                     <dd lay-unselect>
-                        <a id="btnLogout">退出</a>
+                        <a id="btnLogout" th:href="@{/logout}">退出</a>
                     </dd>
                 </dl>
             </li>

@@ -36,4 +36,12 @@ public class RoleAuthServiceImpl implements RoleAuthService {
         criteria.andEqualTo("authId", authId);
         roleAuthDao.deleteByExample(example);
     }
+
+    @Override
+    public List<RoleAuth> findByRoleId(Long roleId) {
+        Example example = new Example(RoleAuth.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("roleId", roleId);
+        return roleAuthDao.selectByExample(example);
+    }
 }

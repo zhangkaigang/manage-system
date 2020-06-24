@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <!--head部分-->
 <head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
 
@@ -21,7 +22,7 @@
                 <!-- 工具栏按钮 start -->
                 <div class="content-head-btn-div">
                     <!-- 工具栏 start -->
-                    <button class="layui-btn" data-type="btnAdd">
+                    <button class="layui-btn" data-type="btnAdd" shiro:hasPermission="user:add">
                         <i class="layui-icon">&#xe654;</i>添加
                     </button>
                     <!-- 工具栏 end -->
@@ -40,10 +41,10 @@
 </div>
 
 <script type="text/html" id="btnBar">
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="btnAssignRole">分配角色</a>
-    <a class="layui-btn layui-btn-xs" lay-event="btnEdit">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="btnDelete">删除</a>
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="btnResetPwd">重置密码</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="btnAssignRole" shiro:hasPermission="user:assignRole">分配角色</a>
+    <a class="layui-btn layui-btn-xs" lay-event="btnEdit" shiro:hasPermission="user:edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="btnDelete" shiro:hasPermission="user:delete">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="btnResetPwd" shiro:hasPermission="user:resetPwd">重置密码</a>
 </script>
 <script type="text/html" id="statusTpl">
     <input type="checkbox" lay-filter="status" value="{{d.userId}}" lay-skin="switch" lay-text="启用|禁用" {{d.status=='ENABLE'?'checked':''}} />

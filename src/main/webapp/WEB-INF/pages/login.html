@@ -13,7 +13,7 @@
         <div class="login-title">登录</div>
 
         <div class="layui-row layui-col-space15">
-            <form class="layui-form login-form">
+            <form id="loginForm" method="post" class="layui-form login-form" th:action="@{/login}">
                 <div class="layui-col-sm12 layui-col-md12">
                     <div class="layui-form-item">
                         <input type="text" name="loginName" lay-verify="required|loginName" autocomplete="off" placeholder="账号" class="layui-input login-input">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="layui-col-sm12 layui-col-md12">
-                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">立即登录</button>
+                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="login">立即登录</button>
                 </div>
             </form>
         </div>

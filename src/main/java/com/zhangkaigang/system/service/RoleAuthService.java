@@ -1,5 +1,7 @@
 package com.zhangkaigang.system.service;
 
+import com.zhangkaigang.system.pojo.po.RoleAuth;
+
 import java.util.List;
 
 /**
@@ -21,4 +23,11 @@ public interface RoleAuthService {
      * @param authId
      */
     void deleteByAuthId(Long authId);
+
+    /**
+     * 根据角色ID得到角色权限关联集合
+     * @param roleId
+     * @return
+     */
+    List<RoleAuth> findByRoleId(Long roleId);
 }

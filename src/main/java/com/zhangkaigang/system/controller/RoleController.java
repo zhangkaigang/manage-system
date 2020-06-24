@@ -13,6 +13,7 @@ import com.zhangkaigang.system.service.AuthService;
 import com.zhangkaigang.system.service.RoleService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,6 +69,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping("/addPage")
+    @RequiresPermissions("role:add")
     public String addPage() {
         return PRIFIX + "role_add";
     }
@@ -97,6 +99,7 @@ public class RoleController {
      */
     @RequestMapping("/delete")
     @ResponseBody
+    @RequiresPermissions("role:delete")
     public Result delete(@RequestParam(value = "roleIds") String roleIds){
         roleService.delete(roleIds);
         return new Result(true, StatusCodeEnum.OK.getStatusCode());
@@ -107,6 +110,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping("/editPage")
+    @RequiresPermissions("role:edit")
     public String editPage() {
         return PRIFIX + "role_edit";
     }
@@ -141,6 +145,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping("/roleAuth")
+    @RequiresPermissions("role:assignAuth")
     public String roleAuth(){
         return PRIFIX + "role_auth";
     }

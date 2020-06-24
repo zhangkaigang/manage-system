@@ -7,7 +7,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
@@ -70,6 +70,11 @@
     <bean id="templateEngine"
           class="org.thymeleaf.spring4.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver" />
+        <property name="additionalDialects">
+            <set>
+                <bean class="at.pollux.thymeleaf.shiro.dialect.ShiroDialect"/>
+            </set>
+        </property>
     </bean>
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine" />
@@ -116,14 +121,23 @@
                         <!--<prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>-->
                         <!-- 重写图片样式，设置为无图片样式 -->
                         <prop key="kaptcha.obscurificator.impl">com.zhangkaigang.base.config.NoImageStyle</prop>
+                        <prop key="kaptcha.session.key">KAPTCHA_SESSION_KEY</prop>
                     </props>
                 </constructor-arg>
             </bean>
         </property>
     </bean>
 
-
-
+    <!-- 解决API接口跨域问题配置 Spring MVC 版本必须是 4.2 及以上
+         https://blog.csdn.net/qq_42120178/article/details/102873157
+    -->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                     allow-credentials="true"
+                     max-age="3600" />
+    </mvc:cors>
 
 
 </beans>

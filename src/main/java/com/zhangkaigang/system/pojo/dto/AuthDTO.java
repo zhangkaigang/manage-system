@@ -1,5 +1,7 @@
 package com.zhangkaigang.system.pojo.dto;
 
+import java.util.List;
+
 /**
  * @Description:TODO
  * @Author:zhang.kaigang
@@ -57,6 +59,8 @@ public class AuthDTO {
      * 排序
      */
     private Integer sort;
+
+    private List<AuthDTO> children;
 
     /**
      * 冗余字段-父级权限名称
@@ -148,6 +152,13 @@ public class AuthDTO {
         this.sort = sort;
     }
 
+    public List<AuthDTO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<AuthDTO> children) {
+        this.children = children;
+    }
 
     public String getParentName() {
         return parentName;

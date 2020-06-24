@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <!--head部分-->
 <head th:include="layout :: htmlhead" th:with="title='后台管理'"></head>
 <div class="content-div">
@@ -14,10 +15,10 @@
         </div>
         <!-- 工具栏按钮 start -->
         <div class="content-head-btn-div">
-            <button class="layui-btn" data-type="btnAdd">
+            <button class="layui-btn" data-type="btnAdd" shiro:hasPermission="role:add">
                 <i class="layui-icon">&#xe654;</i>添加
             </button>
-            <button class="layui-btn" data-type="btnDelete">
+            <button class="layui-btn" data-type="btnDelete" shiro:hasPermission="role:delete">
                 <i class="layui-icon">&#xe640;</i>删除
             </button>
         </div>

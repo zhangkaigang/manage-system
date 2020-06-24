@@ -30,6 +30,8 @@
     <!-- cacheManager工厂类，指定ehcache.xml的位置 -->
     <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:config/ehcache.xml"></property>
+        <!-- 加个唯一名字防止和shiro缓存冲突 -->
+        <property name="cacheManagerName" value="springEhCacheManager"></property>
     </bean>
     <!-- 声明cacheManager -->
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">

@@ -4,27 +4,17 @@
 <bar th:fragment="sidebar">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree arrow2" style="margin-top: 15px;">
-                <li class="layui-nav-item">
+                <li class="layui-nav-item" th:each="menu:${session.user.menuList}">
                     <a>
-                        <i class="layui-icon layui-icon-set"></i>&emsp;
-                        <cite>系统管理</cite>
+                        <i class="layui-icon" th:classappend="${menu.icon}"></i>&emsp;
+                        <cite th:text="${menu.name}">系统管理</cite>
                         <span class='layui-nav-more'></span>
                     </a>
                     <dl class="layui-nav-child" style="display: block">
-                        <dd>
-                            <a data-id="1" data-url="/sys/user" data-title="用户管理" class="menu_click">用户管理</a>
-                        </dd>
-                        <dd>
-                            <a data-id="2" data-url="/sys/role" data-title="角色管理" class="menu_click">角色管理</a>
-                        </dd>
-                        <dd>
-                            <a data-id="3" data-url="/sys/dept" data-title="部门管理" class="menu_click">部门管理</a>
-                        </dd>
-                        <dd>
-                            <a data-id="4" data-url="/sys/position" data-title="职位管理" class="menu_click">职位管理</a>
-                        </dd>
-                        <dd>
-                            <a data-id="5" data-url="/sys/auth" data-title="权限管理" class="menu_click">权限管理</a>
+                        <dd th:each="children:${menu.children}">
+                            <a th:text="${children.name}" th:data-id="${children.authId}" th:data-url="${children.url}" th:data-title="${children.name}" class="menu_click">
+                                用户管理
+                            </a>
                         </dd>
                     </dl>
                 </li>
